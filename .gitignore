@@ -1,9 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/equipe02/node_modules/
-/equipe02/.pnp
-/equipe02/.pnp.js
+/frontend/node_modules/
+/frontend/.pnp
+/frontend/.pnp.js
 
 # testing
 /coverage
