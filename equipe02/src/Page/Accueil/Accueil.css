@@ -1,0 +1,21 @@
+.container-accueil {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .h1-accueil {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .h3-accueil {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+  
+  .p-accueil {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
