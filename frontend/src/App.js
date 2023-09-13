@@ -9,6 +9,7 @@ import './App.css';
 import MainNavigation from "./Shared/Components/Navigation/MainNavigation";
 import Accueil from "./Page/Accueil/Accueil"
 import Auth from "./users/Pages/Auth"
+import NewStage from "./Page/Stages/Components/NewStage";
 import TestNav from "./Page/test/testNav";
 import Footer from './Shared/Components/Footer/Footer';
 
@@ -25,6 +26,9 @@ routes = (
     </Route>
     <Route path="/Auth" exact>
       <Auth />
+    </Route>
+    <Route path="/Stage/new" exact>
+      <NewStage />
     </Route>
     <Redirect to="/"/>
   </Switch>
