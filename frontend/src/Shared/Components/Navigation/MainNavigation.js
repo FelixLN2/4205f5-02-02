@@ -8,10 +8,10 @@ return (
     <React.Fragment>
         <MainHeader>
             <h1>
-                <Link to="/">College Momo</Link>
+                <Link to="/">College Montmorency</Link>
             </h1>
             <nav>
-
+                <NavLinks/>
             </nav>
         </MainHeader>
     </React.Fragment>

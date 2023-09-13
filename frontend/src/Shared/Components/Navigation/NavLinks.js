@@ -6,6 +6,9 @@ import './NavLinks.css'
 function NavLinks(props){
     return <ul className="nav-links">
     <li>
+        <NavLink to="/testNav">testNav</NavLink>
+    </li>
+    <li>
         <NavLink to="/Stages">Stages</NavLink>
     </li>
     <li>

@@ -1,14 +1,39 @@
 import React, { useState, useCallback } from "react";
-import logo from './logo.svg';
-
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import './App.css';
+import MainNavigation from "./Shared/Components/Navigation/MainNavigation";
 import Accueil from "./Page/Accueil/Accueil"
+import TestNav from "./Page/test/testNav";
 import Footer from './Shared/Components/Footer/Footer';
 
 const App = () =>{
+  let routes;
+
+routes = (
+  <Switch>
+    <Route path="/" exact>
+      <Accueil/>
+    </Route>
+    <Route path="/testNav" exact>
+      <TestNav />
+    </Route>
+    <Redirect to="/"/>
+  </Switch>
+);
+
   return (
     <div className="App">
-      <Accueil/>
+      <div>
+      <Router>
+        <MainNavigation/>
+        <main>{routes}</main>
+      </Router>
+      </div>
       <Footer/>
     </div>
   );
