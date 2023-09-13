@@ -5,15 +5,15 @@ const Etudiant = require("../models/etudiant");
 
 const ETUDIANTS = [
   {
-    numAdmission: 2008442,
+    numAdmission: "2008442",
     mdp:"Mdp123!",
-    nom: "Zachary",
     prenom:"Labelle",
-    telephone:5144206969,
+    nom: "Zachary",
+    telephone:"5144206969",
     courriel: "test@hotmail.com"
   },
 ];
-/*
+
 const getEtudiants = async (requete, reponse, next) => {
   let etudiants;
 
@@ -29,16 +29,18 @@ const getEtudiants = async (requete, reponse, next) => {
     ),
   });
 };
-*/
+
 const getEtudiantById = async (requete, reponse, next) => {
-  const numAdmission = requete.params.numAdmission;
+  const id = requete.params.numAdmission;
   let etudiant;
   try {
-    etudiant = await Etudiant.findById(numAdmission);
+    //etudiant = await Etudiant.findById(numAdmission);
+    etudiant = await Etudiant.findOne({"numAdmission": id});
   } catch (err) {
     return next(
       new HttpErreur("Erreur lors de la récupération de l'étudiant", 500)
     );
+    return err;
   }
   if (!etudiant) {
     return next(new HttpErreur("Aucun étudiant trouvé pour l'id fourni", 404));
@@ -47,20 +49,22 @@ const getEtudiantById = async (requete, reponse, next) => {
 };
 
 const creerEtudiant = async (requete, reponse, next) => {
-  const {numAdmission, nom, courriel, profil, stage } = requete.body;
+  const {numAdmission, mdp, prenom, nom, telephone, courriel } = requete.body;
+  
   const nouveauEtudiant = new Etudiant({
     numAdmission,
+    mdp,
+    prenom,
     nom,
-    courriel,
-    profil,
-    stage: null
-  });
+    telephone,
+    courriel
+  })
 
   try {
     await nouveauEtudiant.save();
     
   } catch (err) {
-    const erreur = new HttpErreur("Création de l'étudiant échouée", 500);
+    const erreur = new HttpErreur(err.message, 500);
     return next(erreur);
   }
   reponse.status(201).json({ etudiant: nouveauEtudiant });
@@ -116,7 +120,7 @@ const supprimerEtudiant = async (requete, reponse, next) => {
   reponse.status(200).json({ message: "Étudiant supprimé" });
 }; */
 
-//exports.getEtudiants = getEtudiants;
+exports.getEtudiants = getEtudiants;
 exports.getEtudiantById = getEtudiantById;
 exports.creerEtudiant = creerEtudiant;
 /* exports.updateEtudiant = updateEtudiant;

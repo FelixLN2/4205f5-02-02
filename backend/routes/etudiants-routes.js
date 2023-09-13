@@ -3,7 +3,7 @@ const express = require("express");
 const controleursEtudiant = require("../controleurs/etudiants-controleurs")
 const router = express.Router();
 
-//router.get("/etudiants", controleursEtudiant.getEtudiants);
+router.get("/etudiants", controleursEtudiant.getEtudiants);
 
 router.get("/:numAdmission", controleursEtudiant.getEtudiantById);
 
