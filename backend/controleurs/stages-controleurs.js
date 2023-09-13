@@ -1,16 +1,13 @@
 const { v4: uuidv4 } = require("uuid");
 const HttpErreur = require("../models/http-erreur");
 
-const Etudiant = require("../models/etudiant");
+const Etudiant = require("../models/stage");
 
-const ETUDIANTS = [
+const STAGES = [
   {
-    numAdmission: 2008442,
-    mdp:"Mdp123!",
-    nom: "Zachary",
-    prenom:"Labelle",
-    telephone:5144206969,
-    courriel: "test@hotmail.com"
+    titre: "420-5F5",
+    description: "cours de 5 heures",
+    employeur_id: 0
   },
 ];
 /*
@@ -30,7 +27,7 @@ const getEtudiants = async (requete, reponse, next) => {
   });
 };
 */
-const getEtudiantById = async (requete, reponse, next) => {
+const getStageById = async (requete, reponse, next) => {
   const numAdmission = requete.params.numAdmission;
   let etudiant;
   try {
