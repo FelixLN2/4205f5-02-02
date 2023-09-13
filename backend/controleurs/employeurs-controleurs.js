@@ -1,74 +1,78 @@
 const { v4: uuidv4 } = require("uuid");
 const HttpErreur = require("../models/http-erreur");
 
-const Etudiant = require("../models/etudiant");
+const Employeur = require("../models/employeur");
+const employeur = require("../models/employeur");
 
-const ETUDIANTS = [
+const EMPLOYEURS = [
   {
-    numAdmission: "2008442",
-    mdp:"Mdp123!",
-    prenom:"Labelle",
-    nom: "Zachary",
-    telephone:"5144206969",
-    courriel: "test@hotmail.com",
-    stages: []
+    identifiant:"",
+    prenom:"",
+    nom:"",
+    telephone:"",
+    courriel:"",
+    nom_entreprise:"",
+    mdp:"",
+    departement:""
   },
 ];
 
-const getEtudiants = async (requete, reponse, next) => {
-  let etudiants;
+const getEmployeurs = async (requete, reponse, next) => {
+  let employeurs;
 
   try {
-    etudiants = await Etudiant.find({});
+    employeurs = await Employeur.find({});
   } catch {
-    return next(new HttpErreur("Erreur accès etudiants"), 500);
+    return next(new HttpErreur("Erreur accès employeurs"), 500);
   }
 
   reponse.json({
-    etudiants: etudiants.map((etudiant) =>
-      etudiant.toObject({ getters: true })
+    employeurs: employeurs.map((employeur) =>
+    employeur.toObject({ getters: true })
     ),
   });
 };
 
-const getEtudiantById = async (requete, reponse, next) => {
-  const id = requete.params.numAdmission;
-  let etudiant;
+const getEmployeurById = async (requete, reponse, next) => {
+  const id = requete.params.identifiant;
+  let employeur;
   try {
-    //etudiant = await Etudiant.findById(numAdmission);
-    etudiant = await Etudiant.findOne({"numAdmission": id});
+    //employeur = await Employeur.findById(identifiant);
+    employeur = await Employeur.findOne({"identifiant": id});
   } catch (err) {
     return next(
-      new HttpErreur("Erreur lors de la récupération de l'étudiant", 500)
+      new HttpErreur("Erreur lors de la récupération de l'employeur", 500)
     );
     return err;
   }
-  if (!etudiant) {
-    return next(new HttpErreur("Aucun étudiant trouvé pour l'id fourni", 404));
+  if (!employeur) {
+    return next(new HttpErreur("Aucun employeur trouvé pour l'id fourni", 404));
   }
-  reponse.json({ etudiant: etudiant.toObject({ getters: true }) });
+  reponse.json({ employeur: employeur.toObject({ getters: true }) });
 };
 
-const creerEtudiant = async (requete, reponse, next) => {
-  const {numAdmission, mdp, prenom, nom, telephone, courriel } = requete.body;
+const creerEmployeur = async (requete, reponse, next) => {
+  const {identifiant, prenom, nom , telephone, courriel, nom_entreprise, mdp, departement } = requete.body;
   
-  const nouveauEtudiant = new Etudiant({
-    numAdmission,
-    mdp,
+  const nouveauEmployeur = new Employeur({
+    identifiant,
     prenom,
-    nom,
-    telephone,
-    courriel
+    nom, 
+    telephone, 
+    courriel,
+    nom_entreprise, 
+    mdp, 
+    departement
   })
 
   try {
-    await nouveauEtudiant.save();
+    await nouveauEmployeur.save();
     
   } catch (err) {
     const erreur = new HttpErreur(err.message, 500);
     return next(erreur);
   }
-  reponse.status(201).json({ etudiant: nouveauEtudiant });
+  reponse.status(201).json({ employeur: nouveauEmployeur });
 };
 
 /* const updateEtudiant = async (requete, reponse, next) => {
@@ -121,9 +125,9 @@ const supprimerEtudiant = async (requete, reponse, next) => {
   reponse.status(200).json({ message: "Étudiant supprimé" });
 }; */
 
-exports.getEtudiants = getEtudiants;
-exports.getEtudiantById = getEtudiantById;
-exports.creerEtudiant = creerEtudiant;
+exports.getEmployeurs = getEmployeurs;
+exports.getEmployeurById = getEmployeurById;
+exports.creerEmployeur = creerEmployeur;
 /* exports.updateEtudiant = updateEtudiant;
 exports.supprimerEtudiant = supprimerEtudiant; */
 

@@ -9,7 +9,8 @@ const etudiantSchema = new Schema({
     prenom: {type: String, required: true},
     nom: {type: String, required: true}, 
     telephone : {type: String, required: true},
-    courriel: {type: String, required: true}
+    courriel: {type: String, required: true},
+    listeStages: [{type: String}]
 });
 
 module.exports = mongoose.model("Etudiant", etudiantSchema);

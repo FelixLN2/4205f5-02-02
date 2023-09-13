@@ -3,9 +3,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', true);
 
-//const stagesRoutes = require("./routes/stages-routes");
+const stagesRoutes = require("./routes/stages-routes");
 const etudiantsRoutes = require("./routes/etudiants-routes");
-//const employeursRoutes = require("./routes/employeurs-routes");
+const employeursRoutes = require("./routes/employeurs-routes");
 const HttpErreur = require("./models/http-erreur");
 
 const app = express();
@@ -19,9 +19,9 @@ app.use((requete, reponse, next) =>{
   next();
 })
 
-//app.use("/api/stages", stagesRoutes);
+app.use("/api/stages", stagesRoutes);
 app.use("/api/etudiants", etudiantsRoutes);
-//app.use("/api/employeurs",employeursRoutes);
+app.use("/api/employeurs",employeursRoutes);
 
 app.use((requete, reponse, next) => {
   return next(new HttpErreur("Route non trouvée", 404));
