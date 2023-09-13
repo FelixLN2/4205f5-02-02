@@ -12,10 +12,7 @@ function NavLinks(props){
         <NavLink to="/Stages">Stages</NavLink>
     </li>
     <li>
-        <NavLink to="/Inscription">Inscription</NavLink>
-    </li>
-    <li>
-        <NavLink to="/Connexion">Connexion</NavLink>
+        <NavLink to="/Auth">Connexion/Inscription</NavLink>
     </li>
     </ul>
 };

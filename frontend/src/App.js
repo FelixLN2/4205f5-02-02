@@ -8,6 +8,7 @@ import {
 import './App.css';
 import MainNavigation from "./Shared/Components/Navigation/MainNavigation";
 import Accueil from "./Page/Accueil/Accueil"
+import Auth from "./users/Pages/Auth"
 import TestNav from "./Page/test/testNav";
 import Footer from './Shared/Components/Footer/Footer';
 
@@ -21,6 +22,9 @@ routes = (
     </Route>
     <Route path="/testNav" exact>
       <TestNav />
+    </Route>
+    <Route path="/Auth" exact>
+      <Auth />
     </Route>
     <Redirect to="/"/>
   </Switch>
