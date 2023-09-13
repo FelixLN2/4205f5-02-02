@@ -12,6 +12,8 @@ router.post('/', controleursEmployeur.creerEmployeur);
 
 router.get("/stages/:identifiant", controleursStage.getStagesEmployeur);
 
+router.post('/stages', controleursStage.creerStage);
+
 //router.patch('/:numAdmission', controleursEtudiant.updateEtudiant);
 
 //router.delete('/:numAdmission', controleursEtudiant.supprimerEtudiant);
