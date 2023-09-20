@@ -3,7 +3,7 @@ const { default: mongoose, mongo } = require("mongoose");
 const { v4: uuidv4 } = require("uuid");
 
 const HttpErreur = require("../models/http-erreur");
-
+const Etudiant = require("../models/etudiant");
 const Stage = require("../models/stage");
 
 const STAGE = [
@@ -19,6 +19,7 @@ const getStageById = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
   let stage;
   try {
+    console.log(stageId);
     stage = await Stage.findById(stageId);
   } catch (err) {
     return next(
@@ -45,6 +46,32 @@ const getStagesEtudiant = async (requete, reponse, next) => {
       stage.toObject({ getters: true })
     ),
   });
+};
+
+
+const addEtudiant = async (requete, reponse, next) => {
+  const stageId = requete.params.stageId;
+  const numAdmission = requete.params.numAdmission;
+  let stage;
+  let etudiant;
+  //faire conditions pour empecher erreurs
+  try{
+    //decider si on veut le stageid ou le titre
+    //faut stageid qui existe et numadission qui existe
+    stage = await Stage.findById(stageId);
+    etudiant = await Etudiant.findOne({"numAdmission": numAdmission});
+    
+    stage.listeEtudiants.push(numAdmission);  
+    etudiant.listeStages.push(stageId); 
+
+    await etudiant.save();
+    await stage.save(); 
+  }catch{
+    return next(new HttpErreur("Erreur ajout id etudiant à listeEtudiants ou vice versa"), 500);
+  }
+
+  reponse.status(200).json({ stage: stage.toObject({ getters: true }), etudiant: etudiant.toObject({ getters: true }) });
+  //reponse.status(200).json({ etudiant: etudiant.toObject({ getters: true }) }); 
 };
 
 const getStagesEmployeur = async (requete, reponse, next) => {
@@ -90,3 +117,4 @@ exports.getStageById = getStageById;
 exports.getStagesEtudiant = getStagesEtudiant;
 exports.getStagesEmployeur = getStagesEmployeur;
 exports.creerStage = creerStage;
+exports.addEtudiant = addEtudiant;
