@@ -22,10 +22,10 @@ const NewStage = () => {
         value: "",
         isValid: false,
       },
-      employeur_id: {
+     /*  employeur_id: {
         value: "",
         isValid: false,
-      },
+      }, */
     },
     false
   );
@@ -37,8 +37,9 @@ const NewStage = () => {
     console.log(formState.inputs);
     try {
         const responseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + "/stage/",
-          "POST",
+          // process.env.REACT_APP_BACKEND_URL + "/stage/",
+          // "POST",
+          sendRequest("http://localhost:5000/api/employeurs/stages"),
           JSON.stringify({
             titre: formState.inputs.titre.value,
             description: formState.inputs.description.value,

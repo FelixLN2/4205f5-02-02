@@ -13,6 +13,8 @@ import {
 } from "../../Shared/util/validators";
 import "./Auth.css";
 
+
+
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -24,12 +26,43 @@ const Auth = () => {
         isValid: false,
       },
 
+      numAdmission: {
+        value:"",
+        isValid: false,
+      },
+
+      prenom: {
+        value:"",
+        isValid: false,
+      },
+      nom: {
+        value:"",
+        isValid: false,
+      },
+      telephone: {
+        value:"",
+        isValid: false,
+      },
+      identifiant: {
+        value:"",
+        isValid: false,
+      },
+
+      nom_entreprise: {
+        value:"",
+        isValid: false,
+      },
+      departement: {
+        value:"",
+        isValid: false,
+      },
+
       courriel: {
         value: "",
         isValid: false,
       },
 
-      password: {
+      mdp: {
         value: "",
         isValid: false,
       },
@@ -45,7 +78,7 @@ const Auth = () => {
         },
         formState.inputs.typeCompte.isValid &&
           formState.inputs.courriel.isValid &&
-          formState.inputs.password.isValid
+          formState.inputs.mdp.isValid
       );
     } else {
       setFormData(
@@ -74,7 +107,7 @@ const Auth = () => {
           JSON.stringify({
             typeCompte: formState.inputs.typeCompte.value,
             courriel: formState.inputs.courriel.value,
-            password: formState.inputs.password.value,
+            mdp: formState.inputs.mdp.value,
           }),
           {
             "Content-type": "application/json",
@@ -90,14 +123,18 @@ const Auth = () => {
       }
     } else {
       try {
+
+        if (formState.inputs.typeCompte.value === "Etudiant"){
+            console.log("pipipoopoo");
+        }
         const reponseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + "/users/inscription",
+          process.env.REACT_APP_BACKEND_URL + "/etudiants/",
           "POST",
           JSON.stringify({
             typeCompte: formState.inputs.typeCompte.value,
             nom: formState.inputs.nom.value,
             courriel: formState.inputs.courriel.value,
-            password: formState.inputs.password.value,
+            mdp: formState.inputs.mdp.value,
           }),
           {
             "Content-Type": "application/json",
@@ -151,12 +188,12 @@ const Auth = () => {
             onInput={inputHandler}
           />
           <Input
-            id="password"
+            id="mdp"
             element="input"
             type="text"
             label="Password"
             validators={[VALIDATOR_MINLENGTH(5)]}
-            errorText="Entrez un password valide, au moins 5 caracteres"
+            errorText="Entrez un mdp valide, au moins 5 caracteres"
             onInput={inputHandler}
           />
           <Button type="submit" disabled={!formState.isValid}>

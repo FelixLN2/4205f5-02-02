@@ -37,7 +37,7 @@ const getEmployeurById = async (requete, reponse, next) => {
   const id = requete.params.identifiant;
   let employeur;
   try {
-    //employeur = await Employeur.findById(identifiant);
+
     employeur = await Employeur.findOne({"identifiant": id});
   } catch (err) {
     return next(
