@@ -94,7 +94,6 @@ const Input = props => {
       <option value=""></option>
       <option value="Employeur">Employeur</option>
       <option value="Etudiant">Etudiant</option>
-      <option value="Coordonnateur">Coordonnateur</option>
     </select>
     ) : null;
 

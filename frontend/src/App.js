@@ -9,7 +9,8 @@ import './App.css';
 import MainNavigation from "./Shared/Components/Navigation/MainNavigation";
 import Accueil from "./Page/Accueil/Accueil"
 import Auth from "./users/Pages/Auth"
-import NewStage from "./Page/Stages/Components/NewStage";
+import NewStage from "./Page/Stages/Pages/NewStage";
+import Stages from "./Page/Stages/Pages/ListeStage";
 import TestNav from "./Page/test/testNav";
 import Footer from './Shared/Components/Footer/Footer';
 
@@ -21,8 +22,8 @@ routes = (
     <Route path="/" exact>
       <Accueil/>
     </Route>
-    <Route path="/testNav" exact>
-      <TestNav />
+    <Route path="/Stage/liste" exact>
+      <Stages />
     </Route>
     <Route path="/Auth" exact>
       <Auth />
@@ -42,7 +43,6 @@ routes = (
         <main>{routes}</main>
       </Router>
       </div>
-      <Footer/>
     </div>
   );
 }
