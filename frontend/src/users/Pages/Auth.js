@@ -18,7 +18,6 @@ const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const { sendRequest } = useHttpClient();
-  let compte = "";
 
   const initialFormState = {
     typeCompte: {
@@ -96,13 +95,12 @@ const Auth = () => {
             nom_entreprise: formState.inputs.nom_entreprise.value,
             mdp: formState.inputs.mdp.value,
             departement: formState.inputs.departement.value,
-            compte: compte,
+            Compte: formState.inputs.typeCompte.value,
           }),
           {
             "Content-type": "application/json",
           }
         );
-        console.log(compte);
         console.log(reponseData);
         auth.login(reponseData.identifiant);
         alertMessage = "Inscription réussie!";
@@ -112,7 +110,7 @@ const Auth = () => {
         alertMessage = "Erreur lors de l'inscription.";
       }
     } else {
-      if(compte === "Etudiant"){
+      if(formState.inputs.typeCompte.value === "Etudiant"){
         try {
           //etudiant
           const reponseData = await sendRequest(
@@ -125,13 +123,12 @@ const Auth = () => {
               telephone: formState.inputs.telephone.value,
               courriel: formState.inputs.courriel.value,
               mdp: formState.inputs.mdp.value,
-              compte: compte,
+              Compte: formState.inputs.typeCompte.value,
             }),
             {
               "Content-Type": "application/json",
             }
           );
-          console.log(compte);
           console.log(reponseData);
           auth.login(reponseData.numAdmission);
           alertMessage = "Inscription réussie!";
@@ -155,13 +152,12 @@ const Auth = () => {
               nom_entreprise: formState.inputs.nom_entreprise.value,
               mdp: formState.inputs.mdp.value,
               departement: formState.inputs.departement.value,
-              compte: compte,
+              Compte: formState.inputs.typeCompte.value,
             }),
             {
               "Content-type": "application/json",
             }
           );
-          console.log(compte);
           console.log(reponseData);
           auth.login(reponseData.identifiant);
           alertMessage = "Inscription réussie!";
@@ -197,7 +193,6 @@ const Auth = () => {
                 initialFormState.identifiant.isValid = true,
                 initialFormState.nom_entreprise.isValid = true,
                 initialFormState.departement.isValid = true,
-                compte = "Employeur",
                 <>
                 
                   <Input
@@ -209,33 +204,7 @@ const Auth = () => {
                     errorText="Entrez un numéro d'admission valide"
                     onInput={inputHandler}
                   />
-                  <Input
-                    id="prenom"
-                    element="input"
-                    type="text"
-                    label="Votre prénom"
-                    validators={[VALIDATOR_REQUIRE()]}
-                    errorText="Entrez un prénom valide"
-                    onInput={inputHandler}
-                  />
-                  <Input
-                    id="nom"
-                    element="input"
-                    type="text"
-                    label="Votre nom"
-                    validators={[VALIDATOR_REQUIRE()]}
-                    errorText="Entrez un nom valide"
-                    onInput={inputHandler}
-                  />
-                  <Input
-                    id="telephone"
-                    element="input"
-                    type="text"
-                    label="Votre numéro de telephone"
-                    validators={[VALIDATOR_REQUIRE()]}
-                    errorText="Entrez un num valide"
-                    onInput={inputHandler}
-                  />
+                  
                 </>
               )}
 
@@ -244,7 +213,6 @@ const Auth = () => {
                 initialFormState.prenom.isValid = true,
                 initialFormState.nom.isValid = true,
                 initialFormState.telephone.isValid = true,
-                compte = "Employeur",
                 <>
                   <Input
                     id="identifiant"
@@ -277,7 +245,33 @@ const Auth = () => {
               )}
             </>
           )}
-
+          <Input
+            id="prenom"
+            element="input"
+            type="text"
+            label="Votre prénom"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Entrez un prénom valide"
+            onInput={inputHandler}
+          />
+          <Input
+            id="nom"
+            element="input"
+            type="text"
+            label="Votre nom"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Entrez un nom valide"
+            onInput={inputHandler}
+          />
+          <Input
+            id="telephone"
+            element="input"
+            type="text"
+            label="Votre numéro de telephone"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Entrez un num valide"
+            onInput={inputHandler}
+          />
           <Input
             id="courriel"
             element="input"
