@@ -127,7 +127,7 @@ const Auth = () => {
           }
         );
         console.log(reponseData);
-        //auth.login(reponseData.user.id);
+        auth.login(reponseData.numAdmission);
         alertMessage = "Inscription réussie!";
         history.push(process.env.REACT_APP_BACKEND_URL);
       } catch (err) {
