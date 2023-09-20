@@ -70,7 +70,7 @@ const addEtudiant = async (requete, reponse, next) => {
     return next(new HttpErreur("Erreur ajout id etudiant à listeEtudiants ou vice versa"), 500);
   }
 
-  reponse.status(200).json({ stage: stage.toObject({ getters: true }) });
+  reponse.status(200).json({ stage: stage.toObject({ getters: true }), etudiant: etudiant.toObject({ getters: true }) });
   //reponse.status(200).json({ etudiant: etudiant.toObject({ getters: true }) }); 
 };
 
