@@ -83,7 +83,7 @@ const Auth = () => {
       try {
         //Employeurs
         const reponseData = await sendRequest(
-          "http://localhost:5000/api/employeurs/",
+          "http://localhost:5000/api/auth/",
           "POST",
           JSON.stringify({
             identifiant: formState.inputs.identifiant.value,
@@ -100,17 +100,18 @@ const Auth = () => {
           }
         );
         console.log(reponseData);
-        auth.login(reponseData.user.id);
+        //auth.login(reponseData.user.id);
         alertMessage = "Inscription réussie!";
         history.push(process.env.REACT_APP_BACKEND_URL);
       } catch (err) {
         console.log(err);
-        alertMessage = "Erreur lors de la Inscription.";
+        alertMessage = "Erreur lors de l'inscription.";
       }
     } else {
       try {
+        //etudiant
         const reponseData = await sendRequest(
-          "http://localhost:5000/api/etudiants/",
+          "http://localhost:5000/api/auth/",
           "POST",
           JSON.stringify({
             numAdmission: formState.inputs.numAdmission.value,
@@ -119,18 +120,19 @@ const Auth = () => {
             telephone: formState.inputs.telephone.value,
             courriel: formState.inputs.courriel.value,
             mdp: formState.inputs.mdp.value,
+            typeCompte: formState.inputs.typeCompte.value,
           }),
           {
             "Content-Type": "application/json",
           }
         );
         console.log(reponseData);
-        auth.login(reponseData.user.id);
+        //auth.login(reponseData.user.id);
         alertMessage = "Inscription réussie!";
         history.push(process.env.REACT_APP_BACKEND_URL);
       } catch (err) {
         console.log(err);
-        alertMessage = "Erreur lors de la inscription.";
+        alertMessage = "Erreur lors de l'inscription." + err;
       }
     }
     alert(alertMessage);
@@ -154,7 +156,11 @@ const Auth = () => {
           {!isLoginMode && (
             <>
               {formState.inputs.typeCompte.value === "Etudiant" && (
+                initialFormState.identifiant.isValid = true,
+                initialFormState.nom_entreprise.isValid = true,
+                initialFormState.departement.isValid = true,
                 <>
+                
                   <Input
                     id="numAdmission"
                     element="input"
@@ -171,6 +177,24 @@ const Auth = () => {
                     label="Votre prénom"
                     validators={[VALIDATOR_REQUIRE()]}
                     errorText="Entrez un prénom valide"
+                    onInput={inputHandler}
+                  />
+                  <Input
+                    id="nom"
+                    element="input"
+                    type="text"
+                    label="Votre nom"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    errorText="Entrez un nom valide"
+                    onInput={inputHandler}
+                  />
+                  <Input
+                    id="telephone"
+                    element="input"
+                    type="text"
+                    label="Votre numéro de telephone"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    errorText="Entrez un num valide"
                     onInput={inputHandler}
                   />
                 </>
@@ -228,7 +252,7 @@ const Auth = () => {
             errorText="Entrez un mot de passe valide, au moins 5 caractères"
             onInput={inputHandler}
           />
-          <Button type="submit" disabled={!formState.isValid}>
+          <Button type="submit">
             {isLoginMode ? "Connexion" : "Inscription"}
           </Button>
         </form>

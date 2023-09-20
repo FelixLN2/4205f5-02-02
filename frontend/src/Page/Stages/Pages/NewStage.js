@@ -22,10 +22,10 @@ const NewStage = () => {
         value: "",
         isValid: false,
       },
-     /*  employeur_id: {
+      /*employeur_id: {
         value: "",
-        isValid: false,
-      }, */
+        isValid: true,
+      },*/
     },
     false
   );
@@ -39,18 +39,18 @@ const NewStage = () => {
         const responseData = await sendRequest(
           // process.env.REACT_APP_BACKEND_URL + "/stage/",
           // "POST",
-          sendRequest("http://localhost:5000/api/employeurs/stages"),
+          "http://localhost:5000/api/employeurs/stages", "POST",
           JSON.stringify({
             titre: formState.inputs.titre.value,
             description: formState.inputs.description.value,
-            employeur_id: formState.inputs.employeur_id.value,
+            //employeur_id: formState.inputs.employeur_id.value,
           }),
           {
             "Content-Type": "application/json",
           }
         );
         console.log(responseData);
-        //history.push("/Stage/liste");
+        history.push("/Stage/liste");
       } catch (err) {
         //history.push("/Contact")
       }

@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', true);
 
-const stagesRoutes = require("./routes/stages-routes");
+const authRoutes = require("./routes/auth-routes");
 const etudiantsRoutes = require("./routes/etudiants-routes");
 const employeursRoutes = require("./routes/employeurs-routes");
 const HttpErreur = require("./models/http-erreur");
@@ -19,7 +19,7 @@ app.use((requete, reponse, next) =>{
   next();
 })
 
-app.use("/api/stages", stagesRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/etudiants", etudiantsRoutes);
 app.use("/api/employeurs",employeursRoutes);
 
@@ -38,7 +38,7 @@ app.use((error, requete, reponse, next) => {
 });
 
 mongoose
-.connect("mongodb://localhost:27017")
+.connect("mongodb://0.0.0.0:27017")
 .then(() => {
     app.listen(5000)
     console.log("Connexion à la base de données réussie");

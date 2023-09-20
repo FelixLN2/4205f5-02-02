@@ -1,9 +1,10 @@
 const express = require("express");
 
-const controleursStage = require("../controleurs/stages-controleurs")
+const controleursAuth = require("../controleurs/auth-controleurs")
 const router = express.Router();
 
-//router.get("/stages", controleursStage.getStages);
+
+router.post("/", controleursAuth.creerUser);
 
 //router.get("/:identifiant", controleursStage.getStageById);
 
