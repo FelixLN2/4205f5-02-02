@@ -8,11 +8,14 @@ router.get("/etudiants", controleursEtudiant.getEtudiants);
 
 router.get("/stages", controleursStage.getStagesEtudiant);
 
+router.get("/stages/:stageId", controleursStage.getStageById);
+
 router.get("/:numAdmission", controleursEtudiant.getEtudiantById);
 
 router.post('/', controleursEtudiant.creerEtudiant);
 
 
+router.patch("/:numAdmission/:stageId", controleursStage.addEtudiant);
 
 //router.patch('/:numAdmission', controleursEtudiant.updateEtudiant);
 
