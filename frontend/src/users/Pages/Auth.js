@@ -81,34 +81,7 @@ const Auth = () => {
     event.preventDefault();
     let alertMessage = "";
     if (isLoginMode) {
-      try {
-        //Employeurs
-        const reponseData = await sendRequest(
-          "http://localhost:5000/api/auth/",
-          "POST",
-          JSON.stringify({
-            identifiant: formState.inputs.identifiant.value,
-            prenom: formState.inputs.prenom.value,
-            nom: formState.inputs.nom.value,
-            telephone: formState.inputs.telephone.value,
-            courriel: formState.inputs.courriel.value,
-            nom_entreprise: formState.inputs.nom_entreprise.value,
-            mdp: formState.inputs.mdp.value,
-            departement: formState.inputs.departement.value,
-            Compte: formState.inputs.typeCompte.value,
-          }),
-          {
-            "Content-type": "application/json",
-          }
-        );
-        console.log(reponseData);
-        auth.login(reponseData.identifiant);
-        alertMessage = "Inscription réussie!";
-        history.push(process.env.REACT_APP_BACKEND_URL);
-      } catch (err) {
-        console.log(err);
-        alertMessage = "Erreur lors de l'inscription.";
-      }
+      // Code pour connexion
     } else {
       if(formState.inputs.typeCompte.value === "Etudiant"){
         try {
