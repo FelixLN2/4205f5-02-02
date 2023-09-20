@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import Input from "../../../Shared/Components/FormElements/Input";
 import Button from "../../../Shared/Components/FormElements/Button";
@@ -9,8 +9,13 @@ import {
   VALIDATOR_MINLENGTH,
 } from "../../../Shared/util/validators";
 import "./StageForm.css";
+import { AuthContext } from '../../../Shared/context/auth-context';
+
 
 const NewStage = () => {
+  const auth = useContext(AuthContext);
+  const userId = auth.userId;
+
   const { error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm(
     {
@@ -22,10 +27,10 @@ const NewStage = () => {
         value: "",
         isValid: false,
       },
-      /*employeur_id: {
-        value: "",
+      employeur_id: {
+        value: userId,
         isValid: true,
-      },*/
+      },
     },
     false
   );

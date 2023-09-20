@@ -92,7 +92,7 @@ const getStagesEmployeur = async (requete, reponse, next) => {
 };
 
 const creerStage = async (requete, reponse, next) => {
-  const { titre,description, employeur_id = null, listeEtudiants = [] } = requete.body;
+  const { titre,description, employeur_id, listeEtudiants = [] } = requete.body;
   const nouveauStage = new Stage({
     titre,
     description, 

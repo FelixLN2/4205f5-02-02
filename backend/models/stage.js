@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const stageSchema = new Schema({
     titre: {type: String, required: true},
     description: {type: String, required: true},
-    employeur_id: {type: String, ref:"Employeur"},
+    employeur_id: {type: String, ref:"Employeur", required: true},
     listeEtudiants: [{type: String}]
 });
 

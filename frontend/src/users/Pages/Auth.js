@@ -13,10 +13,12 @@ import {
 } from "../../Shared/util/validators";
 import "./Auth.css";
 
+
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const { sendRequest } = useHttpClient();
+  let compte = "";
 
   const initialFormState = {
     typeCompte: {
@@ -94,13 +96,15 @@ const Auth = () => {
             nom_entreprise: formState.inputs.nom_entreprise.value,
             mdp: formState.inputs.mdp.value,
             departement: formState.inputs.departement.value,
+            compte: compte,
           }),
           {
             "Content-type": "application/json",
           }
         );
+        console.log(compte);
         console.log(reponseData);
-        //auth.login(reponseData.user.id);
+        auth.login(reponseData.identifiant);
         alertMessage = "Inscription réussie!";
         history.push(process.env.REACT_APP_BACKEND_URL);
       } catch (err) {
@@ -108,32 +112,66 @@ const Auth = () => {
         alertMessage = "Erreur lors de l'inscription.";
       }
     } else {
-      try {
-        //etudiant
-        const reponseData = await sendRequest(
-          "http://localhost:5000/api/auth/",
-          "POST",
-          JSON.stringify({
-            numAdmission: formState.inputs.numAdmission.value,
-            prenom: formState.inputs.prenom.value,
-            nom: formState.inputs.nom.value,
-            telephone: formState.inputs.telephone.value,
-            courriel: formState.inputs.courriel.value,
-            mdp: formState.inputs.mdp.value,
-            typeCompte: formState.inputs.typeCompte.value,
-          }),
-          {
-            "Content-Type": "application/json",
-          }
-        );
-        console.log(reponseData);
-        auth.login(reponseData.numAdmission);
-        alertMessage = "Inscription réussie!";
-        history.push(process.env.REACT_APP_BACKEND_URL);
-      } catch (err) {
-        console.log(err);
-        alertMessage = "Erreur lors de l'inscription." + err;
+      if(compte === "Etudiant"){
+        try {
+          //etudiant
+          const reponseData = await sendRequest(
+            "http://localhost:5000/api/auth/",
+            "POST",
+            JSON.stringify({
+              numAdmission: formState.inputs.numAdmission.value,
+              prenom: formState.inputs.prenom.value,
+              nom: formState.inputs.nom.value,
+              telephone: formState.inputs.telephone.value,
+              courriel: formState.inputs.courriel.value,
+              mdp: formState.inputs.mdp.value,
+              compte: compte,
+            }),
+            {
+              "Content-Type": "application/json",
+            }
+          );
+          console.log(compte);
+          console.log(reponseData);
+          auth.login(reponseData.numAdmission);
+          alertMessage = "Inscription réussie!";
+          history.push(process.env.REACT_APP_BACKEND_URL);
+        } catch (err) {
+          console.log(err);
+          alertMessage = "Erreur lors de l'inscription." + err;
+        }
+      } else {
+        try {
+          //Employeurs
+          const reponseData = await sendRequest(
+            "http://localhost:5000/api/auth/",
+            "POST",
+            JSON.stringify({
+              identifiant: formState.inputs.identifiant.value,
+              prenom: formState.inputs.prenom.value,
+              nom: formState.inputs.nom.value,
+              telephone: formState.inputs.telephone.value,
+              courriel: formState.inputs.courriel.value,
+              nom_entreprise: formState.inputs.nom_entreprise.value,
+              mdp: formState.inputs.mdp.value,
+              departement: formState.inputs.departement.value,
+              compte: compte,
+            }),
+            {
+              "Content-type": "application/json",
+            }
+          );
+          console.log(compte);
+          console.log(reponseData);
+          auth.login(reponseData.identifiant);
+          alertMessage = "Inscription réussie!";
+          history.push(process.env.REACT_APP_BACKEND_URL);
+        } catch (err) {
+          console.log(err);
+          alertMessage = "Erreur lors de l'inscription." + err;
+        }
       }
+      
     }
     alert(alertMessage);
   };
@@ -159,6 +197,7 @@ const Auth = () => {
                 initialFormState.identifiant.isValid = true,
                 initialFormState.nom_entreprise.isValid = true,
                 initialFormState.departement.isValid = true,
+                compte = "Employeur",
                 <>
                 
                   <Input
@@ -201,6 +240,11 @@ const Auth = () => {
               )}
 
               {formState.inputs.typeCompte.value === "Employeur" && (
+                initialFormState.numAdmission.isValid = true,
+                initialFormState.prenom.isValid = true,
+                initialFormState.nom.isValid = true,
+                initialFormState.telephone.isValid = true,
+                compte = "Employeur",
                 <>
                   <Input
                     id="identifiant"
