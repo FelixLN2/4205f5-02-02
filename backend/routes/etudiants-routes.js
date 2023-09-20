@@ -6,11 +6,13 @@ const router = express.Router();
 
 router.get("/etudiants", controleursEtudiant.getEtudiants);
 
+router.get("/stages", controleursStage.getStagesEtudiant);
+
 router.get("/:numAdmission", controleursEtudiant.getEtudiantById);
 
 router.post('/', controleursEtudiant.creerEtudiant);
 
-router.get("/stages", controleursStage.getStagesEtudiant);
+
 
 //router.patch('/:numAdmission', controleursEtudiant.updateEtudiant);
 

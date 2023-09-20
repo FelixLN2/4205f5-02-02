@@ -50,7 +50,7 @@ const getEtudiantById = async (requete, reponse, next) => {
 };
 
 const creerEtudiant = async (requete, reponse, next) => {
-  const {numAdmission, mdp, prenom, nom, telephone, courriel } = requete.body;
+  const {numAdmission, mdp, prenom, nom, telephone, courriel, listeStages } = requete.body;
   
   const nouveauEtudiant = new Etudiant({
     numAdmission,
@@ -58,7 +58,8 @@ const creerEtudiant = async (requete, reponse, next) => {
     prenom,
     nom,
     telephone,
-    courriel
+    courriel,
+    listeStages
   })
 
   try {

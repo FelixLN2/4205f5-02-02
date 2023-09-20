@@ -48,7 +48,7 @@ const getStagesEtudiant = async (requete, reponse, next) => {
 };
 
 const getStagesEmployeur = async (requete, reponse, next) => {
-  const employeurId = requete.params.identifiant;
+  const identifiant = requete.params.identifiant;
   let stages;
 
   try {
