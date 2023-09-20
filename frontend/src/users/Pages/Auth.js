@@ -13,87 +13,67 @@ import {
 } from "../../Shared/util/validators";
 import "./Auth.css";
 
-
-
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const { sendRequest } = useHttpClient();
-  const [formState, inputHandler, setFormData] = useForm(
-    {
-      typeCompte: {
-        value: "",
-        isValid: false,
-      },
 
-      numAdmission: {
-        value:"",
-        isValid: false,
-      },
-
-      prenom: {
-        value:"",
-        isValid: false,
-      },
-      nom: {
-        value:"",
-        isValid: false,
-      },
-      telephone: {
-        value:"",
-        isValid: false,
-      },
-      identifiant: {
-        value:"",
-        isValid: false,
-      },
-
-      nom_entreprise: {
-        value:"",
-        isValid: false,
-      },
-      departement: {
-        value:"",
-        isValid: false,
-      },
-
-      courriel: {
-        value: "",
-        isValid: false,
-      },
-
-      mdp: {
-        value: "",
-        isValid: false,
-      },
+  const initialFormState = {
+    typeCompte: {
+      value: "",
+      isValid: false,
     },
+    //Common
+    prenom: {
+      value: "",
+      isValid: false,
+    },
+    nom: {
+      value: "",
+      isValid: false,
+    },
+    telephone: {
+      value: "",
+      isValid: false,
+    },
+    courriel: {
+      value: "",
+      isValid: false,
+    },
+    mdp: {
+      value: "",
+      isValid: false,
+    },
+    //Etudiants
+    numAdmission: {
+      value: "",
+      isValid: false,
+    },
+    //Employeur
+    identifiant: {
+      value: "",
+      isValid: false,
+    },
+    nom_entreprise: {
+      value: "",
+      isValid: false,
+    },
+    departement: {
+      value: "",
+      isValid: false,
+    },
+  };
+
+  const [formState, inputHandler, setFormData] = useForm(
+    initialFormState,
     false
   );
+
   const switchModeHandler = () => {
-    if (!isLoginMode) {
-      setFormData(
-        {
-          ...formState.inputs,
-          nom: undefined,
-        },
-        formState.inputs.typeCompte.isValid &&
-          formState.inputs.courriel.isValid &&
-          formState.inputs.mdp.isValid
-      );
-    } else {
-      setFormData(
-        {
-          ...formState.inputs,
-          nom: {
-            value: "",
-            isValid: false,
-          },
-        },
-        false
-      );
-    }
     setIsLoginMode((prevMode) => !prevMode);
+    setFormData(initialFormState, false);
   };
+
   const history = useHistory();
 
   const authSubmitHandler = async (event) => {
@@ -101,13 +81,19 @@ const Auth = () => {
     let alertMessage = "";
     if (isLoginMode) {
       try {
+        //Employeurs
         const reponseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + "/users/connexion",
+          "http://localhost:5000/api/employeurs/",
           "POST",
           JSON.stringify({
-            typeCompte: formState.inputs.typeCompte.value,
+            identifiant: formState.inputs.identifiant.value,
+            prenom: formState.inputs.prenom.value,
+            nom: formState.inputs.nom.value,
+            telephone: formState.inputs.telephone.value,
             courriel: formState.inputs.courriel.value,
+            nom_entreprise: formState.inputs.nom_entreprise.value,
             mdp: formState.inputs.mdp.value,
+            departement: formState.inputs.departement.value,
           }),
           {
             "Content-type": "application/json",
@@ -115,24 +101,22 @@ const Auth = () => {
         );
         console.log(reponseData);
         auth.login(reponseData.user.id);
-        alertMessage = "Connexion réussie!";
+        alertMessage = "Inscription réussie!";
         history.push(process.env.REACT_APP_BACKEND_URL);
       } catch (err) {
         console.log(err);
-        alertMessage = "Erreur lors de la connexion.";
+        alertMessage = "Erreur lors de la Inscription.";
       }
     } else {
       try {
-
-        if (formState.inputs.typeCompte.value === "Etudiant"){
-            console.log("pipipoopoo");
-        }
         const reponseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + "/etudiants/",
+          "http://localhost:5000/api/etudiants/",
           "POST",
           JSON.stringify({
-            typeCompte: formState.inputs.typeCompte.value,
+            numAdmission: formState.inputs.numAdmission.value,
+            prenom: formState.inputs.prenom.value,
             nom: formState.inputs.nom.value,
+            telephone: formState.inputs.telephone.value,
             courriel: formState.inputs.courriel.value,
             mdp: formState.inputs.mdp.value,
           }),
@@ -164,20 +148,68 @@ const Auth = () => {
             type="text"
             label="Type de compte"
             validators={[VALIDATOR_REQUIRE()]}
-            errorText="Choissisez le type de compte"
+            errorText="Choisissez le type de compte"
             onInput={inputHandler}
           />
           {!isLoginMode && (
-            <Input
-              id="nom"
-              element="input"
-              type="text"
-              label="Votre nom"
-              validators={[VALIDATOR_REQUIRE()]}
-              errorText="Entrez un nom valide"
-              onInput={inputHandler}
-            />
+            <>
+              {formState.inputs.typeCompte.value === "Etudiant" && (
+                <>
+                  <Input
+                    id="numAdmission"
+                    element="input"
+                    type="text"
+                    label="Numéro d'admission"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    errorText="Entrez un numéro d'admission valide"
+                    onInput={inputHandler}
+                  />
+                  <Input
+                    id="prenom"
+                    element="input"
+                    type="text"
+                    label="Votre prénom"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    errorText="Entrez un prénom valide"
+                    onInput={inputHandler}
+                  />
+                </>
+              )}
+
+              {formState.inputs.typeCompte.value === "Employeur" && (
+                <>
+                  <Input
+                    id="identifiant"
+                    element="input"
+                    type="text"
+                    label="Identifiant"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    errorText="Entrez un identifiant valide"
+                    onInput={inputHandler}
+                  />
+                  <Input
+                    id="nom_entreprise"
+                    element="input"
+                    type="text"
+                    label="Nom de l'entreprise"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    errorText="Entrez un nom d'entreprise valide"
+                    onInput={inputHandler}
+                  />
+                  <Input
+                    id="departement"
+                    element="input"
+                    type="text"
+                    label="Département"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    errorText="Entrez un département valide"
+                    onInput={inputHandler}
+                  />
+                </>
+              )}
+            </>
           )}
+
           <Input
             id="courriel"
             element="input"
@@ -193,7 +225,7 @@ const Auth = () => {
             type="text"
             label="Password"
             validators={[VALIDATOR_MINLENGTH(5)]}
-            errorText="Entrez un mdp valide, au moins 5 caracteres"
+            errorText="Entrez un mot de passe valide, au moins 5 caractères"
             onInput={inputHandler}
           />
           <Button type="submit" disabled={!formState.isValid}>
