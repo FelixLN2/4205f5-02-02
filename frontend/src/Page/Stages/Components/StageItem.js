@@ -12,6 +12,10 @@ const StageItem = (props) => {
           <div className="stage-item__info">
             <h1>{props.titre}</h1>
             <h4>Description: {props.description}</h4>
+            <h3>Employeur</h3>
+            <h4>Nom: {props.nom}</h4>
+            <h4>Prenom: {props.prenom}</h4>
+            <h4>Courriel: {props.courriel}</h4>
           </div>
         </Card>
       </li>
