@@ -49,6 +49,31 @@ const getEtudiantById = async (requete, reponse, next) => {
   reponse.json({ etudiant: etudiant.toObject({ getters: true }) });
 };
 
+const verifMdp = async (requete, reponse, next) => {
+  const id = requete.params.numAdmission;
+  const mdp = requete.params.mdp;
+
+  let etudiant;
+  try {
+    //etudiant = await Etudiant.findById(numAdmission);
+    etudiant = await Etudiant.findOne({"numAdmission": id});
+  } catch (err) {
+    return next(
+      new HttpErreur("Erreur lors de la récupération de l'étudiant", 500)
+    );
+    return err;
+  }
+  if (!etudiant) {
+    return next(new HttpErreur("Aucun étudiant trouvé pour l'id fourni", 404));
+  }else{
+    if(etudiant.mdp != mdp){
+      return next(new HttpErreur("Le mot de passe est incorrect", 404));
+    }
+  }
+
+  reponse.json("Connexion reussie");
+};
+
 const creerEtudiant = async (requete, reponse, next) => {
   const {numAdmission, mdp, prenom, nom, telephone, courriel, listeStages } = requete.body;
   
@@ -125,6 +150,7 @@ const supprimerEtudiant = async (requete, reponse, next) => {
 exports.getEtudiants = getEtudiants;
 exports.getEtudiantById = getEtudiantById;
 exports.creerEtudiant = creerEtudiant;
+exports.verifMdp = verifMdp;
 /* exports.updateEtudiant = updateEtudiant;
 exports.supprimerEtudiant = supprimerEtudiant; */
 

@@ -82,7 +82,39 @@ const Auth = () => {
     let alertMessage = "";
     if (isLoginMode) {
       // Code pour connexion
+      if(formState.inputs.typeCompte.value === "Etudiant"){
+        try {
+          //etudiant
+          const reponseData = await sendRequest(
+            "http://localhost:5000/api/etudiants/" + formState.inputs.numAdmission.value + "/" + formState.inputs.mdp.value,
+            "GET"
+          );
+          console.log(reponseData);
+          auth.login(reponseData.numAdmission);
+          alertMessage = "Connexion réussie!";
+          history.push(process.env.REACT_APP_BACKEND_URL);
+        } catch (err) {
+          console.log(err);
+          alertMessage = "Erreur lors de la connexion" + err;
+        }
+      } else {
+        try {
+          //Employeurs
+          const reponseData = await sendRequest(
+            "http://localhost:5000/api/employeurs/" + formState.inputs.identifiant.value + "/" + formState.inputs.mdp.value,
+            "GET"
+          );
+          console.log(reponseData);
+          auth.login(reponseData.identifiant);
+          alertMessage = "Connexion réussie!";
+          history.push(process.env.REACT_APP_BACKEND_URL);
+        } catch (err) {
+          console.log(err);
+          alertMessage = "Erreur lors de la connexion." + err;
+        }
+      }
     } else {
+      // Code pour inscription
       if(formState.inputs.typeCompte.value === "Etudiant"){
         try {
           //etudiant
@@ -162,40 +194,12 @@ const Auth = () => {
           />
           {!isLoginMode && (
             <>
-              {formState.inputs.typeCompte.value === "Etudiant" && (
-                initialFormState.identifiant.isValid = true,
-                initialFormState.nom_entreprise.isValid = true,
-                initialFormState.departement.isValid = true,
-                <>
-                
-                  <Input
-                    id="numAdmission"
-                    element="input"
-                    type="text"
-                    label="Numéro d'admission"
-                    validators={[VALIDATOR_REQUIRE()]}
-                    errorText="Entrez un numéro d'admission valide"
-                    onInput={inputHandler}
-                  />
-                  
-                </>
-              )}
-
               {formState.inputs.typeCompte.value === "Employeur" && (
                 initialFormState.numAdmission.isValid = true,
                 initialFormState.prenom.isValid = true,
                 initialFormState.nom.isValid = true,
                 initialFormState.telephone.isValid = true,
                 <>
-                  <Input
-                    id="identifiant"
-                    element="input"
-                    type="text"
-                    label="Identifiant"
-                    validators={[VALIDATOR_REQUIRE()]}
-                    errorText="Entrez un identifiant valide"
-                    onInput={inputHandler}
-                  />
                   <Input
                     id="nom_entreprise"
                     element="input"
@@ -216,44 +220,79 @@ const Auth = () => {
                   />
                 </>
               )}
+              <Input
+                id="prenom"
+                element="input"
+                type="text"
+                label="Votre prénom"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Entrez un prénom valide"
+                onInput={inputHandler}
+              />
+              <Input
+                id="nom"
+                element="input"
+                type="text"
+                label="Votre nom"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Entrez un nom valide"
+                onInput={inputHandler}
+              />
+              <Input
+                id="telephone"
+                element="input"
+                type="text"
+                label="Votre numéro de telephone"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Entrez un num valide"
+                onInput={inputHandler}
+              />
+              <Input
+                id="courriel"
+                element="input"
+                type="text"
+                label="Votre courriel"
+                validators={[VALIDATOR_EMAIL()]}
+                errorText="Entrez un courriel valide"
+                onInput={inputHandler}
+              />
+            </>
+            
+          )}
+
+          {formState.inputs.typeCompte.value === "Etudiant" && (
+            initialFormState.identifiant.isValid = true,
+            initialFormState.nom_entreprise.isValid = true,
+            initialFormState.departement.isValid = true,
+            <>
+              <Input
+                id="numAdmission"
+                element="input"
+                type="text"
+                label="Numéro d'admission"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Entrez un numéro d'admission valide"
+                onInput={inputHandler}
+              />
             </>
           )}
-          <Input
-            id="prenom"
-            element="input"
-            type="text"
-            label="Votre prénom"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Entrez un prénom valide"
-            onInput={inputHandler}
-          />
-          <Input
-            id="nom"
-            element="input"
-            type="text"
-            label="Votre nom"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Entrez un nom valide"
-            onInput={inputHandler}
-          />
-          <Input
-            id="telephone"
-            element="input"
-            type="text"
-            label="Votre numéro de telephone"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Entrez un num valide"
-            onInput={inputHandler}
-          />
-          <Input
-            id="courriel"
-            element="input"
-            type="text"
-            label="Votre courriel"
-            validators={[VALIDATOR_EMAIL()]}
-            errorText="Entrez un courriel valide"
-            onInput={inputHandler}
-          />
+          {formState.inputs.typeCompte.value === "Employeur" && (
+            initialFormState.identifiant.isValid = true,
+            initialFormState.nom_entreprise.isValid = true,
+            initialFormState.departement.isValid = true,
+            <>
+              <Input
+                id="identifiant"
+                element="input"
+                type="text"
+                label="Identifiant"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Entrez un identifiant valide"
+                onInput={inputHandler}
+              />
+            </>
+          )}
+          
           <Input
             id="mdp"
             element="input"

@@ -51,6 +51,30 @@ const getEmployeurById = async (requete, reponse, next) => {
   reponse.json({ employeur: employeur.toObject({ getters: true }) });
 };
 
+const verifMdp = async (requete, reponse, next) => {
+  const id = requete.params.identifiant;
+  const mdp = requete.params.mdp;
+
+  let employeur;
+  try {
+    employeur = await Employeur.findOne({"identifiant": id});
+  } catch (err) {
+    return next(
+      new HttpErreur("Erreur lors de la récupération de l'employeur", 500)
+    );
+    return err;
+  }
+  if (!employeur) {
+    return next(new HttpErreur("Aucun employeur trouvé pour l'id fourni", 404));
+  }else{
+    if(employeur.mdp != mdp){
+      return next(new HttpErreur("Le mot de passe est incorrect", 404));
+    }
+  }
+
+  reponse.json("Connexion reussie");
+};
+
 const creerEmployeur = async (requete, reponse, next) => {
   const {identifiant, prenom, nom , telephone, courriel, nom_entreprise, mdp, departement } = requete.body;
   
@@ -128,6 +152,7 @@ const supprimerEtudiant = async (requete, reponse, next) => {
 exports.getEmployeurs = getEmployeurs;
 exports.getEmployeurById = getEmployeurById;
 exports.creerEmployeur = creerEmployeur;
+exports.verifMdp = verifMdp;
 /* exports.updateEtudiant = updateEtudiant;
 exports.supprimerEtudiant = supprimerEtudiant; */
 

@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get("/employeurs", controleursEmployeur.getEmployeurs);
 
+router.get("/:identifiant/:mdp", controleursEmployeur.verifMdp);
+
 router.get("/:identifiant", controleursEmployeur.getEmployeurById);
 
 router.post('/', controleursEmployeur.creerEmployeur);
