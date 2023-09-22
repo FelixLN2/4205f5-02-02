@@ -10,10 +10,27 @@ const Stages = () => {
         const recupererStages = async () => {
             try {
                 const responseData = await sendRequest("http://localhost:5000/api/etudiants/stages");
+                // Récupérez les stages
+                const stagesData = responseData.stages;
+                // Initialisez un tableau pour stocker les stages avec employeur
+                const stagesAvecEmployeur = [];
 
-                setStages(responseData.stages);
-            }catch(err){
+                for (const stage of stagesData) {
+                    // Récupérez l'employeur correspondant à chaque stage
+                    const employeurResponse = await sendRequest(
+                        `http://localhost:5000/api/employeurs/${stage.employeur_id}`
+                    );
+                    // Ajoutez l'objet employeur au stage
+                    stage.employeur = employeurResponse.employeur;
+                    // Ajoutez le stage mis à jour à la liste
+                    stagesAvecEmployeur.push(stage);
+                }
 
+                // Mettez à jour l'état avec les stages incluant les employeurs
+                setStages(stagesAvecEmployeur);
+            } catch (err) {
+                console.log(err);
+                alert("Erreur lors de la connexion" + err);
             }
         }
         recupererStages();
@@ -25,5 +42,6 @@ const Stages = () => {
         </React.Fragment>
     )
 }
+
 
 export default Stages;
