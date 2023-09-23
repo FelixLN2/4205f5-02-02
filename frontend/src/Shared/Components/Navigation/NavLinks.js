@@ -14,6 +14,9 @@ function NavLinks(props){
     <li>
         <NavLink to="/Auth">Connexion/Inscription</NavLink>
     </li>
+    <li>
+        <NavLink to="/Stage/EmployeurStage">Stage de L'employeur </NavLink>
+    </li>
     </ul>
 };
 
