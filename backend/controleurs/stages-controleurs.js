@@ -8,10 +8,10 @@ const Stage = require("../models/stage");
 
 const STAGE = [
   {
-    titre: "test",
-    description: "test",
-    employeur_id: null,
-    listeEtudiants: []
+    "titre": "test",
+    "description": "test",
+    "employeur_id": null,
+    "listeEtudiants": []
   },
 ];
 

@@ -6,14 +6,14 @@ const employeur = require("../models/employeur");
 
 const EMPLOYEURS = [
   {
-    identifiant:"",
-    prenom:"",
-    nom:"",
-    telephone:"",
-    courriel:"",
-    nom_entreprise:"",
-    mdp:"",
-    departement:""
+    "identifiant":"Employeur1",
+    "prenom":"Prenom",
+    "nom":"Nom",
+    "telephone":"1234567890",
+    "courriel":"Employeur1@entreprise1.com",
+    "nom_entreprise":"Entreprise1",
+    "mdp":"Mdp123!",
+    "departement":"Programmation"
   },
 ];
 

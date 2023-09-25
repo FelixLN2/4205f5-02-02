@@ -38,7 +38,7 @@ app.use((error, requete, reponse, next) => {
 });
 
 mongoose
-.connect("mongodb://0.0.0.0:27017")
+.connect("mongodb+srv://zaclabelle:VqCWVRmeS9NLD3I3@cluster0.xnr8wrk.mongodb.net/")
 .then(() => {
     app.listen(5000)
     console.log("Connexion à la base de données réussie");
@@ -46,5 +46,7 @@ mongoose
 .catch(erreur => {
     console.log(erreur);
 });
+
+//VqCWVRmeS9NLD3I3
 
 //app.listen(5000);

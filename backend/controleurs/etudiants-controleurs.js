@@ -5,14 +5,14 @@ const Etudiant = require("../models/etudiant");
 
 const ETUDIANTS = [
   {
-    numAdmission: "2008442",
-    mdp:"Mdp123!",
-    prenom:"Labelle",
-    nom: "Zachary",
-    telephone:"5144206969",
-    courriel: "test@hotmail.com",
-    stages: []
-  },
+    "numAdmission": "2008442",
+    "mdp":"Mdp123!",
+    "prenom":"Labelle",
+    "nom": "Zachary",
+    "telephone":"5144412113",
+    "courriel": "2008442@cmontmorency.qc.ca",
+    "stages": []
+},
 ];
 
 const getEtudiants = async (requete, reponse, next) => {
