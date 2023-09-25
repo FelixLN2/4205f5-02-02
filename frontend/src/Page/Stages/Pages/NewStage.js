@@ -48,7 +48,7 @@ const NewStage = () => {
           JSON.stringify({
             titre: formState.inputs.titre.value,
             description: formState.inputs.description.value,
-            //employeur_id: formState.inputs.employeur_id.value,
+            employeur_id: formState.inputs.employeur_id.value,
           }),
           {
             "Content-Type": "application/json",
