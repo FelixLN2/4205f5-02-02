@@ -90,7 +90,7 @@ const Auth = () => {
             "GET"
           );
           console.log(reponseData);
-          auth.login(formState.inputs.numAdmission.value);
+          auth.login(formState.inputs.numAdmission.value, "Etudiant");
           alertMessage = "Connexion réussie!";
           history.push(process.env.REACT_APP_BACKEND_URL);
         } catch (err) {
@@ -105,8 +105,7 @@ const Auth = () => {
             "GET"
           );
           console.log(reponseData);
-          auth.login(formState.inputs.identifiant.value);
-          auth.userId = "test";
+          auth.login(formState.inputs.identifiant.value, "Employeur");
           alertMessage = "Connexion réussie!";
           history.push(process.env.REACT_APP_BACKEND_URL);
         } catch (err) {
@@ -136,7 +135,7 @@ const Auth = () => {
             }
           );
           console.log(reponseData);
-          auth.login(reponseData.numAdmission);
+          auth.login(reponseData.numAdmission, "Etudiant");
           alertMessage = "Inscription réussie!";
           history.push(process.env.REACT_APP_BACKEND_URL);
         } catch (err) {
@@ -165,7 +164,7 @@ const Auth = () => {
             }
           );
           console.log(reponseData);
-          auth.login(reponseData.identifiant);
+          auth.login(reponseData.identifiant, "Employeur");
           alertMessage = "Inscription réussie!";
           history.push(process.env.REACT_APP_BACKEND_URL);
         } catch (err) {

@@ -26,10 +26,6 @@ const NewStage = () => {
         value: "",
         isValid: false,
       },
-      employeur_id: {
-        value: auth.userId,
-        isValid: true,
-      },
     },
     false
   );
@@ -47,7 +43,7 @@ const NewStage = () => {
           JSON.stringify({
             titre: formState.inputs.titre.value,
             description: formState.inputs.description.value,
-            employeur_id: formState.inputs.employeur_id.value,
+            employeur_id: auth.userId
           }),
           {
             "Content-Type": "application/json",

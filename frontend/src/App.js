@@ -16,11 +16,13 @@ import Footer from './Shared/Components/Footer/Footer';
 import  { AuthContext } from "./Shared/context/auth-context";
 const App = () =>{
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(false);
+  const [userId, setUserId] = useState("");
+  const [typeCompte, setTypeCompte] = useState("");
 
-  const login = useCallback((userId) => {
+  const login = useCallback((userId, typeCompte) => {
     setIsLoggedIn(true);
     setUserId(userId);
+    setTypeCompte(typeCompte)
   }, []);
 
   const logout = useCallback(() => {
@@ -29,40 +31,57 @@ const App = () =>{
   }, []);
 
   let routes;
-if (isLoggedIn){
   
-  
-  routes = (
-    <Switch>
-      <Route path="/" exact>
-        <Accueil/>
-      </Route>
-      <Route path="/Stage/liste" exact>
-        <Stages />
-      </Route>
-      <Route path="/Stage/new" exact>
-        <NewStage />
-      </Route>
-      <Redirect to="/"/>
-    </Switch>
-  );
-  
+  if (isLoggedIn){
+    //Si Employeur
+    if (typeCompte === "Employeur") {
 
-}else{
-  routes = (
-    <Switch>
-      <Route path="/" exact>
-        <Accueil />
-      </Route>
-      <Route path="/Auth" exact>
-        <Auth />
-      </Route>
-      <Redirect to="/" />
-    </Switch>
-  );
+      routes = (
+        <Switch>
+          <Route path="/" exact>
+            <Accueil/>
+          </Route>
+          <Route path="/Stage/liste" exact>
+            <Stages />
+          </Route>
+          <Route path="/Stage/new" exact>
+            <NewStage />
+          </Route>
+          <Redirect to="/"/>
+        </Switch>
+      );
+    }
+    //Si Etudiant
+    else{
 
+      routes = (
+        <Switch>
+          <Route path="/" exact>
+            <Accueil/>
+          </Route>
+          <Route path="/Stage/liste" exact>
+            <Stages />
+          </Route>
+          <Redirect to="/"/>
+        </Switch>
+      );
+    }
 
-}
+  }
+  //Si pas connecté
+  else{
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <Accueil />
+        </Route>
+        <Route path="/Auth" exact>
+          <Auth />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  }
 
   return (
     <div className="App">
