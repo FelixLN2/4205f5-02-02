@@ -44,7 +44,7 @@ const NewStage = () => {
         const responseData = await sendRequest(
           // process.env.REACT_APP_BACKEND_URL + "/stage/",
           // "POST",
-          "http://localhost:5000/api/employeurs/stages", "POST",
+          process.env.REACT_APP_BACKEND_URL + "/employeurs/stages", "POST",
           JSON.stringify({
             titre: formState.inputs.titre.value,
             description: formState.inputs.description.value,

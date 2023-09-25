@@ -9,7 +9,7 @@ const Stages = () => {
     useEffect(() => {
         const recupererStages = async () => {
             try {
-                const responseData = await sendRequest("http://localhost:5000/api/etudiants/stages");
+                const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/etudiants/stages");
                 // Récupérez les stages
                 const stagesData = responseData.stages;
                 // Initialisez un tableau pour stocker les stages avec employeur
@@ -18,7 +18,7 @@ const Stages = () => {
                 for (const stage of stagesData) {
                     // Récupérez l'employeur correspondant à chaque stage
                     const employeurResponse = await sendRequest(
-                        `http://localhost:5000/api/employeurs/${stage.employeur_id}`
+                        process.env.REACT_APP_BACKEND_URL + "/employeurs/" + stage.employeur_id
                     );
                     // Ajoutez l'objet employeur au stage
                     stage.employeur = employeurResponse.employeur;

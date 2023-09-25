@@ -86,7 +86,7 @@ const Auth = () => {
         try {
           //etudiant
           const reponseData = await sendRequest(
-            "http://localhost:5000/api/etudiants/" + formState.inputs.numAdmission.value + "/" + formState.inputs.mdp.value,
+            process.env.REACT_APP_BACKEND_URL + "/etudiants/" + formState.inputs.numAdmission.value + "/" + formState.inputs.mdp.value,
             "GET"
           );
           console.log(reponseData);
@@ -101,7 +101,7 @@ const Auth = () => {
         try {
           //Employeurs
           const reponseData = await sendRequest(
-            "http://localhost:5000/api/employeurs/" + formState.inputs.identifiant.value + "/" + formState.inputs.mdp.value,
+            process.env.REACT_APP_BACKEND_URL + "/employeurs/" + formState.inputs.identifiant.value + "/" + formState.inputs.mdp.value,
             "GET"
           );
           console.log(reponseData);
@@ -119,7 +119,7 @@ const Auth = () => {
         try {
           //etudiant
           const reponseData = await sendRequest(
-            "http://localhost:5000/api/auth/",
+            process.env.REACT_APP_BACKEND_URL + "/auth/",
             "POST",
             JSON.stringify({
               numAdmission: formState.inputs.numAdmission.value,
@@ -146,7 +146,7 @@ const Auth = () => {
         try {
           //Employeurs
           const reponseData = await sendRequest(
-            "http://localhost:5000/api/auth/",
+            process.env.REACT_APP_BACKEND_URL + "/auth/",
             "POST",
             JSON.stringify({
               identifiant: formState.inputs.identifiant.value,

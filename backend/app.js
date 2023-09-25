@@ -38,7 +38,8 @@ app.use((error, requete, reponse, next) => {
 });
 
 mongoose
-.connect("mongodb+srv://zaclabelle:VqCWVRmeS9NLD3I3@cluster0.xnr8wrk.mongodb.net/")
+.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_PASSWORD}.rrmqgpc.mongodb.net/?retryWrites=true&w=majority`)
+
 .then(() => {
     app.listen(5000)
     console.log("Connexion à la base de données réussie");
