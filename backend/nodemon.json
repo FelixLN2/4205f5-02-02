@@ -2,6 +2,6 @@
     "env": {
         "DB_USER": "zaclabelle",
         "DB_PASSWORD": "VqCWVRmeS9NLD3I3",
-        "DB_NAME":"stagesInformatiques"
+        "DB_NAME":"cluster0"
     }
 }
