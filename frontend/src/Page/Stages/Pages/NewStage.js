@@ -14,7 +14,6 @@ import { AuthContext } from '../../../Shared/context/auth-context';
 
 const NewStage = () => {
   const auth = useContext(AuthContext);
-  const userId = auth.userId;
 
   const { error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm(
@@ -28,7 +27,7 @@ const NewStage = () => {
         isValid: false,
       },
       employeur_id: {
-        value: userId,
+        value: auth.userId,
         isValid: true,
       },
     },

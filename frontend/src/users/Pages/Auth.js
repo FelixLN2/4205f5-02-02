@@ -90,7 +90,7 @@ const Auth = () => {
             "GET"
           );
           console.log(reponseData);
-          auth.login(reponseData.numAdmission);
+          auth.login(formState.inputs.numAdmission.value);
           alertMessage = "Connexion réussie!";
           history.push(process.env.REACT_APP_BACKEND_URL);
         } catch (err) {
@@ -105,7 +105,8 @@ const Auth = () => {
             "GET"
           );
           console.log(reponseData);
-          auth.login(reponseData.identifiant);
+          auth.login(formState.inputs.identifiant.value);
+          auth.userId = "test";
           alertMessage = "Connexion réussie!";
           history.push(process.env.REACT_APP_BACKEND_URL);
         } catch (err) {
