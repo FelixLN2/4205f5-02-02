@@ -38,7 +38,7 @@ app.use((error, requete, reponse, next) => {
 });
 
 mongoose
-.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.rrmqgpc.mongodb.net/`)
+.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.u787zuo.mongodb.net/`)
 
 .then(() => {
     app.listen(5000)
