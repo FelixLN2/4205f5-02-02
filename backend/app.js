@@ -19,9 +19,9 @@ app.use((requete, reponse, next) =>{
   next();
 })
 
-app.use("/api/auth", authRoutes);
-app.use("/api/etudiants", etudiantsRoutes);
-app.use("/api/employeurs",employeursRoutes);
+app.use("/auth", authRoutes);
+app.use("/etudiants", etudiantsRoutes);
+app.use("/employeurs",employeursRoutes);
 
 app.use((requete, reponse, next) => {
   return next(new HttpErreur("Route non trouvée", 404));
