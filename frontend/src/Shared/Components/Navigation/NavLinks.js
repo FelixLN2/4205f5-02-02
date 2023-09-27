@@ -11,7 +11,7 @@ function NavLinks(props){
     //Si  l'utilisateur est connecté la fonction va le trier le type d'utilisateur pour lui afficher seulement les choses qui est supposé à acceder.
     //sinon il a juste accès à connexion
     if (auth.isLoggedIn){
-        const { isLoggedIn, logout } = AuthContext();
+        //const { isLoggedIn, logout } = AuthContext();
 
         //Si employeur
         if (auth.typeCompte === "Employeur"){
