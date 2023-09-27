@@ -11,7 +11,6 @@ import Accueil from "./Page/Accueil/Accueil"
 import Auth from "./users/Pages/Auth"
 import NewStage from "./Page/Stages/Pages/NewStage";
 import Stages from "./Page/Stages/Pages/ListeStage";
-import Footer from './Shared/Components/Footer/Footer';
 import  { AuthContext } from "./Shared/context/auth-context";
 const App = () =>{
   const [isLoggedIn = false, setIsLoggedIn] = useState(false);
@@ -70,7 +69,7 @@ const App = () =>{
       </Router>
       </AuthContext.Provider>
       </div>
-      {/* <Footer /> */}
+
     </div>
   );
 }
