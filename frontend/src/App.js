@@ -11,7 +11,6 @@ import Accueil from "./Page/Accueil/Accueil"
 import Auth from "./users/Pages/Auth"
 import NewStage from "./Page/Stages/Pages/NewStage";
 import Stages from "./Page/Stages/Pages/ListeStage";
-import TestNav from "./Page/test/testNav";
 import Footer from './Shared/Components/Footer/Footer';
 import  { AuthContext } from "./Shared/context/auth-context";
 const App = () =>{
@@ -26,6 +25,8 @@ const App = () =>{
   }, []);
 
   const logout = useCallback(() => {
+        //const { isLoggedIn, logout } = Auth();
+
     setIsLoggedIn(false);
     setUserId(null);
     setTypeCompte(null);
@@ -69,7 +70,7 @@ const App = () =>{
       </Router>
       </AuthContext.Provider>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

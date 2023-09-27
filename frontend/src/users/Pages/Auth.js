@@ -18,7 +18,10 @@ const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const { sendRequest } = useHttpClient();
-
+  // const logout = () => {
+  //   // Logique de déconnexion
+  //   setIsLoginMode(false);
+  // };
   const initialFormState = {
     typeCompte: {
       value: "",
@@ -81,10 +84,10 @@ const Auth = () => {
     event.preventDefault();
     let alertMessage = "";
     if (isLoginMode) {
-      // Code pour connexion
+      // permert de faire la connexion si c'est un employeur ou un étudiant 
       if(formState.inputs.typeCompte.value === "Etudiant"){
         try {
-          //etudiant
+          // en tant qu'étudiant au niveau de la connexion
           const reponseData = await sendRequest(
             process.env.REACT_APP_BACKEND_URL + "/etudiants/" + formState.inputs.numAdmission.value + "/" + formState.inputs.mdp.value,
             "GET"
@@ -99,7 +102,7 @@ const Auth = () => {
         }
       } else {
         try {
-          //Employeurs
+          //en tant qu'Employeurs au niveau de la connexion
           const reponseData = await sendRequest(
             process.env.REACT_APP_BACKEND_URL + "/employeurs/" + formState.inputs.identifiant.value + "/" + formState.inputs.mdp.value,
             "GET"
@@ -114,7 +117,7 @@ const Auth = () => {
         }
       }
     } else {
-      // Code pour inscription
+      // Code pour faire l'inscription si c'est un étudiant ou bien un 
       if(formState.inputs.typeCompte.value === "Etudiant"){
         try {
           //etudiant
@@ -178,6 +181,11 @@ const Auth = () => {
   };
 
   return (
+      //     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+  //       {children}
+  //     </AuthContext.Provider>
+  //   );
+  // };
     <React.Fragment>
       <Card className="authentication">
         <h2>Connexion requise</h2>
@@ -313,5 +321,7 @@ const Auth = () => {
     </React.Fragment>
   );
 };
-
+// export const useAuth = () => {
+//   return useContext(AuthContext);
+// };
 export default Auth;
