@@ -22,11 +22,6 @@ function NavLinks(props){
                 <li>
                     <NavLink to="/Stage/new">Ajouter stage</NavLink>
                 </li>
-                <li>
-                <NavLink to="/Deconexion/Deconexion">Déconexion</NavLink>
-                {/* {isLoggedIn && <Deconnexion onLogout={logout} />} */}
-
-                </li>
             </ul>
         } 
         //Si Etudiant
@@ -35,11 +30,7 @@ function NavLinks(props){
                 <li>
                     <NavLink to="/Stage/liste">Stages</NavLink>
                 </li>
-                <li>
-                <NavLink to="/Deconexion/Deconexion">Déconexion</NavLink>
-                {/* {isLoggedIn && <Deconnexion onLogout={logout} />} */}
-
-                 </li>
+                
             </ul>
         }
     }
