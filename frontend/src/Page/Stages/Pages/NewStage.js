@@ -173,7 +173,7 @@ const NewStage = () => {
               errorText="Entrez une réponse valide."
               onInput={inputHandler}
           />
-        <Button type="submit" disabled={!formState.isValid}>
+        <Button type="submit" disabled={!formState.isValid} enabled={formState.isValid}>
           Ajouter Stage
         </Button>
       </form>
