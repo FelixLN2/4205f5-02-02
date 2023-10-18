@@ -67,8 +67,8 @@ const addEtudiant = async (requete, reponse, next) => {
 
     await etudiant.save();
     await stage.save(); 
-  }catch{
-    return next(new HttpErreur("Erreur ajout id etudiant à listeEtudiants ou vice versa"), 500);
+  }catch (err) {
+    return next(new HttpErreur("Erreur ajout id etudiant à listeEtudiants ou vice versa" + err), 500);
   }
 
   reponse.status(200).json({ stage: stage.toObject({ getters: true }), etudiant: etudiant.toObject({ getters: true }) });
@@ -81,8 +81,8 @@ const getStagesEmployeur = async (requete, reponse, next) => {
 
   try {
     stages = await Stage.find({employeur_id:identifiant});
-  } catch {
-    return next(new HttpErreur("Erreur accès stages"), 500);
+  } catch (err){
+    return next(new HttpErreur("Erreur accès stages" + err), 500);
   }
 
   reponse.json({
@@ -120,7 +120,7 @@ const supprimerStage = async (requete, reponse, next) => {
 
   try {
     console.log(stageId);
-    const unStage = Stage.findById(stageId);
+    const unStage = await Stage.findById(stageId);
     //
     // faut enlever le stage de la liste de stages pour les etudiants et employeurs
     //
