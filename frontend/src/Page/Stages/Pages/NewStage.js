@@ -26,6 +26,42 @@ const NewStage = () => {
         value: "",
         isValid: false,
       },
+      Courriel: {
+        value: "",
+        isValid: false,
+      },      
+      Employeur: {
+        value: "",
+        isValid: false,
+      },      
+      Nom: {
+        value: "",
+        isValid: false,
+      },      
+      Prenom: {
+        value: "",
+        isValid: false,
+      },
+      dateDebut : {
+        value: "",
+        isValid: false,
+      },      
+      dateFin: {
+        value: "",
+        isValid: false,
+      },
+      stagePayant: {
+        value: "",
+        isValid: false,
+      },      
+      modalite : {
+        value: "",
+        isValid: false,
+      },
+      status : {
+        value: "",
+        isValid: false,
+      },
     },
     false
   );
@@ -76,7 +112,79 @@ const NewStage = () => {
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Entrez un description valide."
           onInput={inputHandler}
-        />
+        />            
+        <Input
+              id="courriel"
+              element="input"
+              type="text"
+              label="Courriel"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Entrez un Courriel valide."
+              onInput={inputHandler}
+            />        
+            <Input
+            id="employeur"
+            element="input"
+            type="text"
+            label="Employeur du stage"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Entrez un Employeur valide."
+            onInput={inputHandler}
+          />       
+          <Input
+              id="prenom"
+              element="input"
+              type="text"
+              label="Prenom"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Entrez un prenom valide."
+              onInput={inputHandler}
+              />        
+          <Input
+              id="dateDebut"
+              element="input"
+              type="text"
+              label="date du début du stage"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Entrez une date du début du stage valide."
+              onInput={inputHandler}
+            />        
+          <Input
+              id="dateFin"
+              element="input"
+              type="text"
+              label="date du fin du stage"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Entrez une date de fin du stage valide."
+              onInput={inputHandler}
+          />
+          <Input
+              id="stagePayant"
+              element="input"
+              type="text"
+              label="stage payant (oui ou non)"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Entrez une réponse valide."
+              onInput={inputHandler}
+          />
+          <Input
+              id="modalite"
+              element="input"
+              type="text"
+              label="modalite du stage(distance , présentiel ou hybride)"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Entrez une réponse valide."
+              onInput={inputHandler}
+          />
+            <Input
+              id="status"
+              element="input"
+              type="text"
+              label="status du stage(ouvert ou fermé)"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Entrez une réponse valide."
+              onInput={inputHandler}
+          />
         <Button type="submit" disabled={!formState.isValid}>
           Ajouter Stage
         </Button>

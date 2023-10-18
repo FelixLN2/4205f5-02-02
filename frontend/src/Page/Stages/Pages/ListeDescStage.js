@@ -30,6 +30,10 @@ const ListeDescStage = () => {
       <h1>Stage Details</h1>
       <p>Title: {stageData.titre}</p>
       <p>Description: {stageData.description}</p>
+      {/* <p>Courriel: {stageData.courriel}</p>
+      <p>Employeur</p>
+      <p>Nom: {stageData.nom}</p>
+      <p>Prenom: {stageData.prenom}</p> */}
     </div>
   );
 };
