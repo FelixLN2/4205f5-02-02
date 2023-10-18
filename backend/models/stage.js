@@ -11,7 +11,7 @@ const stageSchema = new Schema({
     // fin: {type: String, required:true},
     // payant: {type: Boolean, required:true},
     // modalite: {type: String, required:true},
-    // entreprise: {type: String, required:true},
+    // nom_entreprise: {type: String, required:true},
     // status: {type: Boolean, required:true},
     listeEtudiants: [{type: String}]
 });

@@ -117,18 +117,17 @@ const creerStage = async (requete, reponse, next) => {
 
 const supprimerStage = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
-
+  let unStage;
   try {
     console.log(stageId);
-    const unStage = await Stage.findById(stageId);
+    unStage = await Stage.findById(stageId);
     //
-    // faut enlever le stage de la liste de stages pour les etudiants et employeurs
+    // faut enlever le stage de la liste de stages pour les etudiants
     //
     await Etudiant.updateMany({listeStages: stageId}, { $pull: {listeStages: stageId}});
-    const employeur = await Employeur.findById(unStage.employeur_id);
-    await employeur.listeStages.pull(stageId);
-
+    console.log("La suppression du stage pour chaque objet Etudiant a fonctionné");
     await Stage.findByIdAndRemove(stageId);
+    console.log("La suppression du stage a fonctionné");
   } catch (err) {
     return next(
       new HttpErreur("Erreur lors de la suppression du stage" + err, 500)
@@ -137,7 +136,7 @@ const supprimerStage = async (requete, reponse, next) => {
   if (!unStage) {
     return next(new HttpErreur("Aucun stage trouvé pour l'id fourni", 404));
   }
- 
+  reponse.json("Stage supprimé");
 };
 
 const modifierStage = async (requete, reponse, next) => {
@@ -147,7 +146,7 @@ const modifierStage = async (requete, reponse, next) => {
   try {
 
     //
-    //debut: requete.params.debut, fin: requete.params.fin, payant: requete.params.payant, modalite: requete.params.modalite, entreprise: requete.params.entreprise, status: requete.params.status
+    //debut: requete.params.debut, fin: requete.params.fin, payant: requete.params.payant, modalite: requete.params.modalite, nom_entreprise: requete.params.nom_entreprise, status: requete.params.status
     //
     await Stage.findByIdAndUpdate(stageId, {titre: requete.params.titre, description: requete.params.description })
     
@@ -155,7 +154,7 @@ const modifierStage = async (requete, reponse, next) => {
     const erreur = new HttpErreur(err, 500);
     return next(erreur);
   }
-  
+  reponse.json("Stage modifié");
 };
 
 
