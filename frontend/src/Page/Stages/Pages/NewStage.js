@@ -33,14 +33,6 @@ const NewStage = () => {
       nom_entreprise: {
         value: "",
         isValid: false,
-      },      
-      Nom: {
-        value: "",
-        isValid: false,
-      },      
-      Prenom: {
-        value: "",
-        isValid: false,
       },
       dateDebut : {
         value: "",
@@ -135,16 +127,7 @@ const NewStage = () => {
             validators={[VALIDATOR_REQUIRE()]}
             errorText="Entrez un nom d'entreprise valide."
             onInput={inputHandler}
-          />       
-          <Input
-              id="prenom"
-              element="input"
-              type="text"
-              label="Prenom"
-              validators={[VALIDATOR_REQUIRE()]}
-              errorText="Entrez un prenom valide."
-              onInput={inputHandler}
-              />        
+          />              
           <Input
               id="dateDebut"
               element="input"
