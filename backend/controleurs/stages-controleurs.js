@@ -120,7 +120,7 @@ const supprimerStage = async (requete, reponse, next) => {
 
   try {
     console.log(stageId);
-    unStage = Stage.findById(stageID);
+    const unStage = Stage.findById(stageId);
     //
     // faut enlever le stage de la liste de stages pour les etudiants et employeurs
     //
