@@ -26,7 +26,7 @@ const NewStage = () => {
         value: "",
         isValid: false,
       },
-      Courriel: {
+      courriel: {
         value: "",
         isValid: false,
       },      
