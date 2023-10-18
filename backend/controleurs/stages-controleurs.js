@@ -125,8 +125,9 @@ const supprimerStage = async (requete, reponse, next) => {
     // faut enlever le stage de la liste de stages pour les etudiants et employeurs
     //
     await Etudiant.updateMany({listeStages: stageId}, { $pull: {listeStages: stageId}});
-
+    console.lot("La suppression du stage pour chaque objet Etudiant a fonctionné");
     await Stage.findByIdAndRemove(stageId);
+    console.lot("La suppression du stage a fonctionné");
   } catch (err) {
     return next(
       new HttpErreur("Erreur lors de la suppression du stage" + err, 500)
