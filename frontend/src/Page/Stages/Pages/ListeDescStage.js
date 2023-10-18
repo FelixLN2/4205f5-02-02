@@ -4,6 +4,7 @@ import { useHttpClient } from "../../../Shared/hooks/http-hook";
 import { AuthContext } from '../../../Shared/context/auth-context';
 import Card from "../../../Shared/Components/UIElements/Card";
 
+//asdf
 const ListeDescStage = () => {
   const { id } = useParams();
   const { error, sendRequest, clearError } = useHttpClient();
