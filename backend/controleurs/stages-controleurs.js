@@ -64,7 +64,7 @@ const addEtudiant = async (requete, reponse, next) => {
     
     stage.listeEtudiants.push(numAdmission);  
     etudiant.listeStages.push(stageId); 
-
+    
     await etudiant.save();
     await stage.save(); 
   }catch (err) {
@@ -93,11 +93,17 @@ const getStagesEmployeur = async (requete, reponse, next) => {
 };
 
 const creerStage = async (requete, reponse, next) => {
-  const { titre,description, employeur_id, listeEtudiants = [] } = requete.body;
+  const { titre, description, employeur_id, debut, fin, payant, modalite, nom_entreprise, status, listeEtudiants = [] } = requete.body;
   const nouveauStage = new Stage({
     titre,
     description, 
     employeur_id,
+    debut,
+    fin,
+    payant,
+    modalite,
+    nom_entreprise,
+    status,
     listeEtudiants
   });
   
@@ -148,7 +154,7 @@ const modifierStage = async (requete, reponse, next) => {
     //
     //debut: requete.params.debut, fin: requete.params.fin, payant: requete.params.payant, modalite: requete.params.modalite, nom_entreprise: requete.params.nom_entreprise, status: requete.params.status
     //
-    await Stage.findByIdAndUpdate(stageId, {titre: requete.params.titre, description: requete.params.description })
+    await Stage.findByIdAndUpdate(stageId, {titre: requete.params.titre, description: requete.params.description, debut: requete.params.debut, fin: requete.params.fin, payant: requete.params.payant, modalite: requete.params.modalite, nom_entreprise: requete.params.nom_entreprise, status: requete.params.status })
     
   } catch (err) {
     const erreur = new HttpErreur(err, 500);
