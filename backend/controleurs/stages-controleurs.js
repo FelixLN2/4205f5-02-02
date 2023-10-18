@@ -125,8 +125,6 @@ const supprimerStage = async (requete, reponse, next) => {
     // faut enlever le stage de la liste de stages pour les etudiants et employeurs
     //
     await Etudiant.updateMany({listeStages: stageId}, { $pull: {listeStages: stageId}});
-    const employeur = await Employeur.findOne({identifiant: unStage.employeur_id});
-    await employeur.listeStages.pull(stageId);
 
     await Stage.findByIdAndRemove(stageId);
   } catch (err) {
