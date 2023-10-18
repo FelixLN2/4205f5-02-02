@@ -76,6 +76,7 @@ const NewStage = () => {
             fin: formState.inputs.dateFin.value,
             payant: formState.inputs.stagePayant.value,
             modalite: formState.inputs.modalite.value,
+            status: formState.inputs.status.value,
             nom_entreprise: formState.inputs.nom_entreprise.value
           }),
           {
