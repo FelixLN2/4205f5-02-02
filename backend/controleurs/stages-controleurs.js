@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require("uuid");
 const HttpErreur = require("../models/http-erreur");
 const Etudiant = require("../models/etudiant");
 const Stage = require("../models/stage");
+const Employeur = require("../models/employeur");
 
 const STAGE = [
   {
@@ -99,6 +100,7 @@ const creerStage = async (requete, reponse, next) => {
     employeur_id,
     listeEtudiants
   });
+  
 
   try {
 
@@ -113,8 +115,54 @@ const creerStage = async (requete, reponse, next) => {
 };
 
 
+const supprimerStage = async (requete, reponse, next) => {
+  const stageId = requete.params.stageId;
+
+  try {
+    console.log(stageId);
+    const unStage = Stage.findById(stageId);
+    //
+    // faut enlever le stage de la liste de stages pour les etudiants et employeurs
+    //
+    await Etudiant.updateMany({listeStages: stageId}, { $pull: {listeStages: stageId}});
+    const employeur = await Employeur.findById(unStage.employeur_id);
+    await employeur.listeStages.pull(stageId);
+
+    await Stage.findByIdAndRemove(stageId);
+  } catch (err) {
+    return next(
+      new HttpErreur("Erreur lors de la suppression du stage" + err, 500)
+    );
+  }
+  if (!unStage) {
+    return next(new HttpErreur("Aucun stage trouvé pour l'id fourni", 404));
+  }
+ 
+};
+
+const modifierStage = async (requete, reponse, next) => {
+  const stageId = requete.params.stageId;
+ 
+
+  try {
+
+    //
+    //debut: requete.params.debut, fin: requete.params.fin, payant: requete.params.payant, modalite: requete.params.modalite, entreprise: requete.params.entreprise, status: requete.params.status
+    //
+    await Stage.findByIdAndUpdate(stageId, {titre: requete.params.titre, description: requete.params.description })
+    
+  } catch (err) {
+    const erreur = new HttpErreur(err, 500);
+    return next(erreur);
+  }
+  
+};
+
+
 exports.getStageById = getStageById;
 exports.getStagesEtudiant = getStagesEtudiant;
 exports.getStagesEmployeur = getStagesEmployeur;
 exports.creerStage = creerStage;
 exports.addEtudiant = addEtudiant;
+exports.supprimerStage = supprimerStage;
+exports.modifierStage = modifierStage;
