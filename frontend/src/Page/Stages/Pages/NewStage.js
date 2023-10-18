@@ -30,7 +30,7 @@ const NewStage = () => {
         value: "",
         isValid: false,
       },      
-      employeur: {
+      nom_entreprise: {
         value: "",
         isValid: false,
       },      
@@ -82,10 +82,9 @@ const NewStage = () => {
             employeur_id: auth.userId,
             debut: formState.inputs.dateDebut.value,
             fin: formState.inputs.dateFin.value,
-            nom_entreprise: formState.inputs.employeur.value,
             payant: formState.inputs.stagePayant.value,
-            nom_entreprise: formState.inputs.employeur.value,
-
+            modalite: formState.inputs.modalite.value,
+            nom_entreprise: formState.inputs.nom_entreprise.value
           }),
           {
             "Content-Type": "application/json",
@@ -129,7 +128,7 @@ const NewStage = () => {
               onInput={inputHandler}
             />        
             <Input
-            id="employeur"
+            id="nom_entreprise"
             element="input"
             type="text"
             label="Nom entreprise"
