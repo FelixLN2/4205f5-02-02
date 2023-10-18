@@ -117,10 +117,10 @@ const creerStage = async (requete, reponse, next) => {
 
 const supprimerStage = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
-
+  let unStage;
   try {
     console.log(stageId);
-    const unStage = await Stage.findById(stageId);
+    unStage = await Stage.findById(stageId);
     //
     // faut enlever le stage de la liste de stages pour les etudiants
     //
@@ -136,7 +136,7 @@ const supprimerStage = async (requete, reponse, next) => {
   if (!unStage) {
     return next(new HttpErreur("Aucun stage trouvé pour l'id fourni", 404));
   }
-  reponse.status(201).json("Stage supprimé");
+  reponse.json("Stage supprimé");
 };
 
 const modifierStage = async (requete, reponse, next) => {
@@ -154,7 +154,7 @@ const modifierStage = async (requete, reponse, next) => {
     const erreur = new HttpErreur(err, 500);
     return next(erreur);
   }
-  
+  reponse.json("Stage modifié");
 };
 
 
