@@ -97,7 +97,7 @@ const NewStage = () => {
           element="input"
           type="text"
           label="Titre du poste"
-          // validators={[VALIDATOR_REQUIRE()]}
+          validators={[VALIDATOR_REQUIRE()]}
           errorText="Entrez un titre de poste valide."
           onInput={inputHandler}
         />
@@ -106,7 +106,7 @@ const NewStage = () => {
           element="textarea"
           type="text"
           label="Description du poste"
-          // validators={[VALIDATOR_REQUIRE()]}
+          validators={[VALIDATOR_REQUIRE()]}
           errorText="Entrez un description valide."
           onInput={inputHandler}
         />            
@@ -115,7 +115,7 @@ const NewStage = () => {
               element="input"
               type="text"
               label="Courriel"
-              // validators={[VALIDATOR_REQUIRE()]}
+              validators={[VALIDATOR_REQUIRE()]}
               errorText="Entrez un Courriel valide."
               onInput={inputHandler}
             />        
@@ -124,7 +124,7 @@ const NewStage = () => {
             element="input"
             type="text"
             label="Nom entreprise"
-            // validators={[VALIDATOR_REQUIRE()]}
+            validators={[VALIDATOR_REQUIRE()]}
             errorText="Entrez un nom d'entreprise valide."
             onInput={inputHandler}
           />              
@@ -133,7 +133,7 @@ const NewStage = () => {
               element="input"
               type="text"
               label="date du début du stage"
-              // validators={[VALIDATOR_REQUIRE()]}
+              validators={[VALIDATOR_REQUIRE()]}
               errorText="Entrez une date du début du stage valide."
               onInput={inputHandler}
             />        
@@ -142,7 +142,7 @@ const NewStage = () => {
               element="input"
               type="text"
               label="date du fin du stage"
-              // validators={[VALIDATOR_REQUIRE()]}
+              validators={[VALIDATOR_REQUIRE()]}
               errorText="Entrez une date de fin du stage valide."
               onInput={inputHandler}
           />
@@ -151,7 +151,7 @@ const NewStage = () => {
               element="input"
               type="text"
               label="stage payant (oui ou non)"
-              // validators={[VALIDATOR_REQUIRE()]}
+              validators={[VALIDATOR_REQUIRE()]}
               errorText="Entrez une réponse valide."
               onInput={inputHandler}
           />
@@ -160,7 +160,7 @@ const NewStage = () => {
               element="input"
               type="text"
               label="modalite du stage(distance , présentiel ou hybride)"
-              //validators={[VALIDATOR_REQUIRE()]}
+              validators={[VALIDATOR_REQUIRE()]}
               errorText="Entrez une réponse valide."
               onInput={inputHandler}
           />
@@ -169,12 +169,11 @@ const NewStage = () => {
               element="input"
               type="text"
               label="status du stage(ouvert ou fermé)"
-              //validators={[VALIDATOR_REQUIRE()]}
+              validators={[VALIDATOR_REQUIRE()]}
               errorText="Entrez une réponse valide."
               onInput={inputHandler}
           />
-        <Button type="submit" disabled={!formState.isValid}
-         /* enabled={formState.isValid} */>
+        <Button type="submit" disabled={!formState.isValid}>
           Ajouter Stage
         </Button>
       </form>
