@@ -131,7 +131,7 @@ const supprimerStage = async (requete, reponse, next) => {
     await Stage.findByIdAndRemove(stageId);
   } catch (err) {
     return next(
-      new HttpErreur("Erreur lors de la suppression du stage", 500)
+      new HttpErreur("Erreur lors de la suppression du stage" + err, 500)
     );
   }
   if (!unStage) {
