@@ -30,7 +30,7 @@ const NewStage = () => {
         value: "",
         isValid: false,
       },      
-      Employeur: {
+      employeur: {
         value: "",
         isValid: false,
       },      
@@ -79,7 +79,13 @@ const NewStage = () => {
           JSON.stringify({
             titre: formState.inputs.titre.value,
             description: formState.inputs.description.value,
-            employeur_id: auth.userId
+            employeur_id: auth.userId,
+            debut: formState.inputs.dateDebut.value,
+            fin: formState.inputs.dateFin.value,
+            nom_entreprise: formState.inputs.employeur.value,
+            payant: formState.inputs.stagePayant.value,
+            nom_entreprise: formState.inputs.employeur.value,
+
           }),
           {
             "Content-Type": "application/json",
@@ -126,9 +132,9 @@ const NewStage = () => {
             id="employeur"
             element="input"
             type="text"
-            label="Employeur du stage"
+            label="Nom entreprise"
             validators={[VALIDATOR_REQUIRE()]}
-            errorText="Entrez un Employeur valide."
+            errorText="Entrez un nom d'entreprise valide."
             onInput={inputHandler}
           />       
           <Input
