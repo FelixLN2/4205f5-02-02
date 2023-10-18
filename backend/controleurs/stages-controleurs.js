@@ -122,12 +122,12 @@ const supprimerStage = async (requete, reponse, next) => {
     console.log(stageId);
     const unStage = await Stage.findById(stageId);
     //
-    // faut enlever le stage de la liste de stages pour les etudiants et employeurs
+    // faut enlever le stage de la liste de stages pour les etudiants
     //
     await Etudiant.updateMany({listeStages: stageId}, { $pull: {listeStages: stageId}});
-    console.lot("La suppression du stage pour chaque objet Etudiant a fonctionné");
+    console.log("La suppression du stage pour chaque objet Etudiant a fonctionné");
     await Stage.findByIdAndRemove(stageId);
-    console.lot("La suppression du stage a fonctionné");
+    console.log("La suppression du stage a fonctionné");
   } catch (err) {
     return next(
       new HttpErreur("Erreur lors de la suppression du stage" + err, 500)
