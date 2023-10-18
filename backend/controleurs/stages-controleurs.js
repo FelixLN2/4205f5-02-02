@@ -134,7 +134,7 @@ const supprimerStage = async (requete, reponse, next) => {
       new HttpErreur("Erreur lors de la suppression du stage", 500)
     );
   }
-  if (!stage) {
+  if (!unStage) {
     return next(new HttpErreur("Aucun stage trouvé pour l'id fourni", 404));
   }
  
