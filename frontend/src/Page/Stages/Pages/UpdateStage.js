@@ -56,6 +56,7 @@ const UpdateStage = (props) => {
           false
           );
           const history = useHistory();
+
           const placeSubmitHandler = async (event) => {
             event.preventDefault();
             console.log(formState.inputs);
@@ -86,7 +87,7 @@ const UpdateStage = (props) => {
               //history.push("/Contact")
             }
           };
-    
+        
           return (
             <React.Fragment>
               <form className="place-form" onSubmit={placeSubmitHandler}>
@@ -98,7 +99,7 @@ const UpdateStage = (props) => {
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez un titre de poste valide."
                   onInput={inputHandler}
-                  initialValue={formState.inputs.titre.value}
+                  initialValue={props.titre}
                 />
                 <Input
                   id="description"
@@ -108,8 +109,7 @@ const UpdateStage = (props) => {
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez un description valide."
                   onInput={inputHandler}
-                  initialValue={formState.inputs.description.value}
-
+                  initialValue={props.description}
                 />
                 <Input
                   id="courriel"
@@ -119,8 +119,7 @@ const UpdateStage = (props) => {
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez un Courriel valide."
                   onInput={inputHandler}
-                  initialValue={formState.inputs.courriel.value}
-
+                  initialValue={props.courriel}
                 />
                 <Input
                   id="nom_entreprise"
@@ -130,11 +129,10 @@ const UpdateStage = (props) => {
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez un nom d'entreprise valide."
                   onInput={inputHandler}
-                  initialValue={formState.inputs.nom_entreprise.value}
-
+                  initialValue={formState.inputs.titre.value}
                 />
                 <Input
-                  id="debut"
+                  id="dateDebut"
                   element="input"
                   type="text"
                   label="date du début du stage (Année-mois-jours)"
@@ -142,10 +140,9 @@ const UpdateStage = (props) => {
                   errorText="Entrez une date du début du stage valide."
                   onInput={inputHandler}
                   initialValue={formState.inputs.debut.value}
-
                 />
                 <Input
-                  id="fin"
+                  id="dateFin"
                   element="input"
                   type="text"
                   label="date du fin du stage (Année-mois-jours)"
@@ -153,10 +150,9 @@ const UpdateStage = (props) => {
                   errorText="Entrez une date de fin du stage valide."
                   onInput={inputHandler}
                   initialValue={formState.inputs.fin.value}
-
                 />
                 <Input
-                  id="payant"
+                  id="stagePayant"
                   element="input"
                   type="text"
                   label="stage payant (oui ou non)"
@@ -164,7 +160,6 @@ const UpdateStage = (props) => {
                   errorText="Entrez une réponse valide."
                   onInput={inputHandler}
                   initialValue={formState.inputs.payant.value}
-
                 />
                 <Input
                   id="modalite"
@@ -175,7 +170,6 @@ const UpdateStage = (props) => {
                   errorText="Entrez une réponse valide."
                   onInput={inputHandler}
                   initialValue={formState.inputs.modalite.value}
-
                 />
                 <Input
                   id="status"

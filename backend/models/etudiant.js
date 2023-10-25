@@ -10,7 +10,7 @@ const etudiantSchema = new Schema({
     nom: {type: String, required: true}, 
     telephone : {type: String, required: true},
     courriel: {type: String, required: true},
-    listeStages:  { type: Map, of: String }
+    listeStages: {type: Map, of: String }
 });
 
 module.exports = mongoose.model("Etudiant", etudiantSchema);

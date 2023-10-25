@@ -46,7 +46,14 @@ const DescStage = () => {
       <React.Fragment>
         <div>
           <h1>Stage Details</h1>
-          <p>Title: {stageData.identifiant}</p>
+          <p>Title: {stageData.titre}</p>
+          <p>nom_entreprise: {stageData.nom_entreprise}</p>
+          <p>Description: {stageData.description}</p>
+          <p>debut: {stageData.debut}</p>
+          <p>fin: {stageData.fin}</p>
+          <p>payant: {stageData.payant}</p>
+          <p>modalite: {stageData.modalite}</p>
+          <p>status: {stageData.status}</p>
 
           {/* <p>Courriel: {stageData.courriel}</p>
         <p>Employeur</p>
@@ -63,9 +70,16 @@ const DescStage = () => {
   else {
     return (
       <div>
-        <h1>Stage Details</h1>
-        <p>Title: {stageData.titre}</p>
-        <p>Description: {stageData.description}</p>
+          <h1>Stage Details</h1>
+          <p>Title: {stageData.titre}</p>
+          <p>nom_entreprise: {stageData.nom_entreprise}</p>
+          <p>Description: {stageData.description}</p>
+          <p>debut: {stageData.debut}</p>
+          <p>fin: {stageData.fin}</p>
+          <p>payant: {stageData.payant}</p>
+          <p>modalite: {stageData.modalite}</p>
+          <p>status: {stageData.status}</p>
+
         {/* <p>Courriel: {stageData.courriel}</p>
         <p>Employeur</p>
         <p>Nom: {stageData.nom}</p>

@@ -33,15 +33,15 @@ const NewStage = () => {
         value: "",
         isValid: false,
       },
-      dateDebut: {
+      debut: {
         value: "",
         isValid: false,
       },
-      dateFin: {
+      fin: {
         value: "",
         isValid: false,
       },
-      stagePayant: {
+      payant: {
         value: "",
         isValid: false,
       },

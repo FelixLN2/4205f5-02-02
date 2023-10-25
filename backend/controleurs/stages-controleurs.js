@@ -141,7 +141,9 @@ const supprimerStage = async (requete, reponse, next) => {
   try {
     console.log(stageId);
     unStage = await Stage.findById(stageId);
-    etudiants = await Etudiant.find({listeStages: {$in: [stageId]}});
+    etudiants = await Etudiant.find({}).$where(function(){
+      return this.listeStages.has(stageId);
+    });
     //
     // faut enlever le stage de la liste de stages pour les etudiants
     //
