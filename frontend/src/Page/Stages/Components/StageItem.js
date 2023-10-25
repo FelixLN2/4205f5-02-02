@@ -13,7 +13,7 @@ const StageItem = (props) => {
   //Si Employeur
   if (auth.typeCompte === "Employeur"){
     return (
-      <React.Fragment>
+        <Link to={`/Stage/DescStage/${props.id}`}>
         <li className="stage-item">
           <Card className="stage-item__content">
             <div className="stage-item__info">
@@ -22,13 +22,13 @@ const StageItem = (props) => {
             </div>
           </Card>
         </li>
-      </React.Fragment>
+        </Link>
     );
   }
   //Si Etudiant
   else{
     return (
-      <Link to={`/Stage/listDescStage/${props.id}`}>
+      <Link to={`/Stage/DescStage/${props.id}`}>
         <li className="stage-item">
           <Card className="stage-item__content">
             <div className="stage-item__info">

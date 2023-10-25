@@ -45,7 +45,7 @@ const StageList = (props) => {
             id={stage.id}
             titre={stage.titre}
             description={stage.description}
-            // Ajoutez les données de l'employeur correspondant ici
+            nom_entreprise={stage.employeur.nom_entreprise}
             nom={stage.employeur.nom}
             prenom={stage.employeur.prenom}
             courriel={stage.employeur.courriel}

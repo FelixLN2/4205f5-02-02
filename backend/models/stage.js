@@ -13,7 +13,7 @@ const stageSchema = new Schema({
     modalite: {type: String, required:true},
     nom_entreprise: {type: String, required:true},
     status: {type: String, required:true},
-    listeEtudiants: [{type: String}]
+    listeEtudiants: { type: Map, of: Date }
 });
 //mettre payant et status en Boolean prochaine fois
 module.exports = mongoose.model("Stage", stageSchema);

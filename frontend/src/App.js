@@ -11,7 +11,9 @@ import Accueil from "./Page/Accueil/Accueil"
 import Auth from "./users/Pages/Auth"
 import NewStage from "./Page/Stages/Pages/NewStage";
 import Stages from "./Page/Stages/Pages/ListeStage";
-import ListeDescStage from "./Page/Stages/Pages/ListeDescStage";
+import DescStage from "./Page/Stages/Pages/DescStage";
+import UpdateStage from "./Page/Stages/Pages/UpdateStage";
+
 import  { AuthContext } from "./Shared/context/auth-context";
 const App = () =>{
   const [isLoggedIn = false, setIsLoggedIn] = useState(false);
@@ -48,7 +50,10 @@ const App = () =>{
       <Route path="/Stage/new" exact>
         <NewStage />
       </Route>
-      <Route path="/Stage/listDescStage/:id" component={ListeDescStage} />
+      <Route path="/Stage/DescStage/:id" component={DescStage} />
+      <Route path="/Stage/Modifier" exact>
+      <UpdateStage/>
+      </Route>
       <Redirect to="/" />
     </Switch>
   );

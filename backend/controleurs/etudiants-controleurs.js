@@ -11,7 +11,7 @@ const ETUDIANTS = [
     "nom": "Zachary",
     "telephone":"5144412113",
     "courriel": "2008442@cmontmorency.qc.ca",
-    "stages": []
+    "stages": {}
 },
 ];
 

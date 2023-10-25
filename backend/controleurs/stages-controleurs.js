@@ -12,7 +12,7 @@ const STAGE = [
     "titre": "test",
     "description": "test",
     "employeur_id": null,
-    "listeEtudiants": []
+    "listeEtudiants": {}
   },
 ];
 
@@ -55,18 +55,31 @@ const addEtudiant = async (requete, reponse, next) => {
   const numAdmission = requete.params.numAdmission;
   let stage;
   let etudiant;
+  const date = new Date();
+  const today = date.getDate().toString() + "-" + (date.getMonth() + 1).toString() + "-" + date.getFullYear().toString();
+
   //faire conditions pour empecher erreurs
   try{
     //decider si on veut le stageid ou le titre
     //faut stageid qui existe et numadission qui existe
+
     stage = await Stage.findById(stageId);
     etudiant = await Etudiant.findOne({"numAdmission": numAdmission});
-    
-    stage.listeEtudiants.push(numAdmission);  
-    etudiant.listeStages.push(stageId); 
+
+    //Si déjà présent
+    if(stage.listeEtudiants.has(numAdmission) && etudiant.listeStages.has(stageId)){
+      //deja dans la liste, ne peut postuler
+      return next(new HttpErreur("Etudiant a deja appliqué, Etudiant ne peut appliquer au même stage"),500);
+    }
+
+    //modifier pour les maps
+    stage.listeEtudiants.set(numAdmission, today);  
+    etudiant.listeStages.set(stageId, today); 
     
     await etudiant.save();
-    await stage.save(); 
+    await stage.save();
+    
+     
   }catch (err) {
     return next(new HttpErreur("Erreur ajout id etudiant à listeEtudiants ou vice versa" + err), 500);
   }
@@ -75,7 +88,7 @@ const addEtudiant = async (requete, reponse, next) => {
   //reponse.status(200).json({ etudiant: etudiant.toObject({ getters: true }) }); 
 };
 
-const getStagesEmployeur = async (requete, reponse, next) => {
+const getStagesEmployeurById = async (requete, reponse, next) => {
   const identifiant = requete.params.identifiant;
   let stages;
 
@@ -124,13 +137,19 @@ const creerStage = async (requete, reponse, next) => {
 const supprimerStage = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
   let unStage;
+  let etudiants;
   try {
     console.log(stageId);
     unStage = await Stage.findById(stageId);
+    etudiants = await Etudiant.find({listeStages: {$in: [stageId]}});
     //
     // faut enlever le stage de la liste de stages pour les etudiants
     //
-    await Etudiant.updateMany({listeStages: stageId}, { $pull: {listeStages: stageId}});
+    for(const etudiant of etudiants){
+      await etudiant.listeStages.delete(stageId);
+      await etudiant.save();
+    }
+
     console.log("La suppression du stage pour chaque objet Etudiant a fonctionné");
     await Stage.findByIdAndRemove(stageId);
     console.log("La suppression du stage a fonctionné");
@@ -166,7 +185,7 @@ const modifierStage = async (requete, reponse, next) => {
 
 exports.getStageById = getStageById;
 exports.getStagesEtudiant = getStagesEtudiant;
-exports.getStagesEmployeur = getStagesEmployeur;
+exports.getStagesEmployeurById = getStagesEmployeurById;
 exports.creerStage = creerStage;
 exports.addEtudiant = addEtudiant;
 exports.supprimerStage = supprimerStage;
