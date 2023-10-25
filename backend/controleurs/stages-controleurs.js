@@ -137,17 +137,15 @@ const creerStage = async (requete, reponse, next) => {
 const supprimerStage = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
   let unStage;
-  let etudiants;
   try {
     console.log(stageId);
     unStage = await Stage.findById(stageId);
-    etudiants = await Etudiant.find({}).$where(function(){
-      return this.listeStages.has(stageId);
-    });
+    const etudiants = await Etudiant.find({}); // Récupérer tous les étudiants
+    const filteredEtudiants = etudiants.filter(etudiant => etudiant.listeStages.has(stageId));
     //
     // faut enlever le stage de la liste de stages pour les etudiants
     //
-    for(const etudiant of etudiants){
+    for(const etudiant of filteredEtudiants){
       await etudiant.listeStages.delete(stageId);
       await etudiant.save();
     }
