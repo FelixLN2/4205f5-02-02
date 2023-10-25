@@ -9,7 +9,8 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 const DescStage = () => {
   const { id } = useParams();
   const { error, sendRequest, clearError } = useHttpClient();
-  const [stageData, setStageData] = useState({});
+  const [stageData, setStageData] = useState([]);
+  const [employeur, setEmployeur] = useState([]);
   const [listeEtudiants, setListeEtudiants] = useState([{}]);
   const auth = useContext(AuthContext);
 
@@ -30,15 +31,14 @@ const DescStage = () => {
         try {
           const url = `${process.env.REACT_APP_BACKEND_URL}/etudiants/stages/${id}`;
           const responseData = await sendRequest(url);
-          setStageData(responseData.stage);
+          const stage = responseData.stage;
           
-          console.log(stageData.employeur_id);
           // Récupérez l'employeur correspondant au stage
-          const employeurResponse = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/employeurs/" + stageData.employeur_id);
+          const employeurResponse = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/employeurs/" + stage.employeur_id);
           
-          // Ajoutez l'objet employeur au stage
-          setStageData.employeur_id(employeurResponse.employeur)
-
+          
+          setEmployeur(employeurResponse.employeur);         
+          setStageData(stage);
 
         } catch (err) {
           console.error(err);
@@ -88,11 +88,12 @@ const DescStage = () => {
           <p>Payant: {stageData.payant}</p>
           <p>Modalite: {stageData.modalite}</p>
           <p>Status: {stageData.status}</p>
+          <p>Employeur_id: {stageData.employeur_id}</p>
           <br/>
           <h2>Employeur</h2>
-          {/*<p>Nom complet: {stageData.employeur.prenom} {stageData.employeur.nom}</p>
-          <p>Courriel: {stageData.employeur.courriel}</p>
-          <p>Téléphone: {stageData.employeur.telephone}</p>*/}
+          <p>Nom complet: {employeur.prenom} {employeur.nom}</p>
+          <p>Courriel: {employeur.courriel}</p>
+          <p>Téléphone: {employeur.telephone}</p>
 
 
         {/* <p>Courriel: {stageData.courriel}</p>
