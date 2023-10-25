@@ -31,6 +31,15 @@ const DescStage = () => {
           const url = `${process.env.REACT_APP_BACKEND_URL}/etudiants/stages/${id}`;
           const responseData = await sendRequest(url);
           setStageData(responseData.stage);
+          
+          console.log(stageData.employeur_id);
+          // Récupérez l'employeur correspondant au stage
+          const employeurResponse = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/employeurs/" + stageData.employeur_id);
+          
+          // Ajoutez l'objet employeur au stage
+          setStageData.employeur_id(employeurResponse.employeur)
+
+
         } catch (err) {
           console.error(err);
         }
@@ -45,15 +54,15 @@ const DescStage = () => {
     return (
       <React.Fragment>
         <div>
-          <h1>Stage Details</h1>
-          <p>Title: {stageData.titre}</p>
-          <p>nom_entreprise: {stageData.nom_entreprise}</p>
+          <h1>Détails du stage</h1>
+          <p>Titre: {stageData.titre}</p>
+          <p>Nom de l'entreprise:: {stageData.nom_entreprise}</p>
           <p>Description: {stageData.description}</p>
-          <p>debut: {stageData.debut}</p>
-          <p>fin: {stageData.fin}</p>
-          <p>payant: {stageData.payant}</p>
-          <p>modalite: {stageData.modalite}</p>
-          <p>status: {stageData.status}</p>
+          <p>Debut: {stageData.debut}</p>
+          <p>Fin: {stageData.fin}</p>
+          <p>Payant: {stageData.payant}</p>
+          <p>Modalite: {stageData.modalite}</p>
+          <p>Status: {stageData.status}</p>
 
           {/* <p>Courriel: {stageData.courriel}</p>
         <p>Employeur</p>
@@ -70,15 +79,21 @@ const DescStage = () => {
   else {
     return (
       <div>
-          <h1>Stage Details</h1>
-          <p>Title: {stageData.titre}</p>
-          <p>nom_entreprise: {stageData.nom_entreprise}</p>
+          <h1>Détails du stage</h1>
+          <p>Titre: {stageData.titre}</p>
+          <p>Nom de l'entreprise: {stageData.nom_entreprise}</p>
           <p>Description: {stageData.description}</p>
-          <p>debut: {stageData.debut}</p>
-          <p>fin: {stageData.fin}</p>
-          <p>payant: {stageData.payant}</p>
-          <p>modalite: {stageData.modalite}</p>
-          <p>status: {stageData.status}</p>
+          <p>Debut: {stageData.debut}</p>
+          <p>Fin: {stageData.fin}</p>
+          <p>Payant: {stageData.payant}</p>
+          <p>Modalite: {stageData.modalite}</p>
+          <p>Status: {stageData.status}</p>
+          <br/>
+          <h2>Employeur</h2>
+          {/*<p>Nom complet: {stageData.employeur.prenom} {stageData.employeur.nom}</p>
+          <p>Courriel: {stageData.employeur.courriel}</p>
+          <p>Téléphone: {stageData.employeur.telephone}</p>*/}
+
 
         {/* <p>Courriel: {stageData.courriel}</p>
         <p>Employeur</p>

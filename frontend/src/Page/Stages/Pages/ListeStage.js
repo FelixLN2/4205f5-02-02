@@ -43,7 +43,7 @@ const Stages = () => {
                         // Ajoutez le stage mis à jour à la liste
                         stagesAvecEmployeur.push(stage);
                     }
-    
+                        
                     // Mettez à jour l'état avec les stages incluant les employeurs
                     setStages(stagesAvecEmployeur);
                 } catch (err) {

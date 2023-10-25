@@ -99,7 +99,7 @@ const UpdateStage = (props) => {
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez un titre de poste valide."
                   onInput={inputHandler}
-                  initialValue={props.titre}
+                  defaultValue={props.titre}
                 />
                 <Input
                   id="description"
@@ -109,7 +109,7 @@ const UpdateStage = (props) => {
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez un description valide."
                   onInput={inputHandler}
-                  initialValue={props.description}
+                  defaultValue={props.description}
                 />
                 <Input
                   id="courriel"
@@ -119,7 +119,7 @@ const UpdateStage = (props) => {
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez un Courriel valide."
                   onInput={inputHandler}
-                  initialValue={props.courriel}
+                  defaultValue={props.courriel}
                 />
                 <Input
                   id="nom_entreprise"
@@ -129,37 +129,37 @@ const UpdateStage = (props) => {
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez un nom d'entreprise valide."
                   onInput={inputHandler}
-                  initialValue={formState.inputs.titre.value}
+                  defaultValue={props.nom_entreprise}
                 />
                 <Input
-                  id="dateDebut"
+                  id="debut"
                   element="input"
                   type="text"
                   label="date du début du stage (Année-mois-jours)"
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez une date du début du stage valide."
                   onInput={inputHandler}
-                  initialValue={formState.inputs.debut.value}
+                  defaultValue={props.debut}
                 />
                 <Input
-                  id="dateFin"
+                  id="fin"
                   element="input"
                   type="text"
                   label="date du fin du stage (Année-mois-jours)"
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez une date de fin du stage valide."
                   onInput={inputHandler}
-                  initialValue={formState.inputs.fin.value}
+                  defaultValue={props.fin}
                 />
                 <Input
-                  id="stagePayant"
+                  id="payant"
                   element="input"
                   type="text"
                   label="stage payant (oui ou non)"
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez une réponse valide."
                   onInput={inputHandler}
-                  initialValue={formState.inputs.payant.value}
+                  defaultValue={props.payant}
                 />
                 <Input
                   id="modalite"
@@ -169,7 +169,7 @@ const UpdateStage = (props) => {
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez une réponse valide."
                   onInput={inputHandler}
-                  initialValue={formState.inputs.modalite.value}
+                  defaultValue={props.modalite}
                 />
                 <Input
                   id="status"
@@ -179,7 +179,7 @@ const UpdateStage = (props) => {
                   validators={[VALIDATOR_REQUIRE()]}
                   errorText="Entrez une réponse valide."
                   onInput={inputHandler}
-                  initialValue={formState.inputs.status.value}
+                  defaultValue={props.status}
                 />
                 <Button type="submit" disabled={!formState.isValid}>
                   Enregistrer les modifications
