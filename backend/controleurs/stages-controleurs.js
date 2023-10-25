@@ -74,7 +74,7 @@ const addEtudiant = async (requete, reponse, next) => {
 
     //modifier pour les maps
     stage.listeEtudiants.set(numAdmission, today);  
-    etudiant.listeStages.set(stageId, today); 
+    etudiant.listeStages.set(stageId, today);  
     
     await etudiant.save();
     await stage.save();
