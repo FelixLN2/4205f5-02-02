@@ -32,16 +32,16 @@ const UpdateStage = (props) => {
               value: props.nom_entreprise,
               isValid: false,
             },
-            dateDebut: {
-              value: props.dateDebut,
+            debut: {
+              value: props.debut,
               isValid: false,
             },
-            dateFin: {
-              value: props.dateFin,
+            fin: {
+              value: props.fin,
               isValid: false,
             },
-            stagePayant: {
-              value: props.stagePayant,
+            payant: {
+              value: props.payant,
               isValid: false,
             },
             modalite: {
