@@ -18,6 +18,8 @@ router.post('/stages', controleursStage.creerStage);
 
 router.delete("/stages/deleteStage/:stageId", controleursStage.supprimerStage);
 
+router.patch("/stages/modifierStages/:stageId", controleursStage.modifierStage);
+
 //router.patch('/:numAdmission', controleursEtudiant.updateEtudiant);
 
 //router.delete('/:numAdmission', controleursEtudiant.supprimerEtudiant);

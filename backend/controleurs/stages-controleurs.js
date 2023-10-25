@@ -167,12 +167,7 @@ const supprimerStage = async (requete, reponse, next) => {
 const modifierStage = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
  
-
   try {
-
-    //
-    //debut: requete.params.debut, fin: requete.params.fin, payant: requete.params.payant, modalite: requete.params.modalite, nom_entreprise: requete.params.nom_entreprise, status: requete.params.status
-    //
     await Stage.findByIdAndUpdate(stageId, {titre: requete.params.titre, description: requete.params.description, debut: requete.params.debut, fin: requete.params.fin, payant: requete.params.payant, modalite: requete.params.modalite, nom_entreprise: requete.params.nom_entreprise, status: requete.params.status })
     
   } catch (err) {

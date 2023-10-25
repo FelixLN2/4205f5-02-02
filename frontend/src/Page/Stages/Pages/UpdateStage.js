@@ -65,7 +65,7 @@ const UpdateStage = (props) => {
                 // process.env.REACT_APP_BACKEND_URL + "/stage/",
                 // "POST",
                 process.env.REACT_APP_BACKEND_URL + "/employeurs/stages",
-                "POST",
+                "PATCH",
                 JSON.stringify({
                   titre: formState.inputs.titre.value,
                   description: formState.inputs.description.value,
