@@ -59,11 +59,15 @@ const addEtudiant = async (requete, reponse, next) => {
   try{
     //decider si on veut le stageid ou le titre
     //faut stageid qui existe et numadission qui existe
+
+
     stage = await Stage.findById(stageId);
     etudiant = await Etudiant.findOne({"numAdmission": numAdmission});
+
+    //if( stage.listeEtudiants.find(numAdmission))
     
-    stage.listeEtudiants.push(numAdmission);  
-    etudiant.listeStages.push(stageId); 
+    await stage.listeEtudiants.push(numAdmission);  
+    await etudiant.listeStages.push(stageId); 
     
     await etudiant.save();
     await stage.save(); 
