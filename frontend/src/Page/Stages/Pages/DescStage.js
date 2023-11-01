@@ -34,12 +34,7 @@ const DescStage = () => {
           const responseData = await sendRequest(url);
           const stage = responseData.stage;
 
-          /*const testUrl = `${process.env.REACT_APP_BACKEND_URL}/etudiants/stages/${id}`;
-          const testResponseData = await sendRequest(testUrl);
-          const etudiant = testResponseData.etudiant;*/
-          console.log(responseData);
-          console.log(id);
-          console.log(auth.userId);
+       
           
           // Récupérez l'employeur correspondant au stage
           const employeurResponse = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/employeurs/" + stage.employeur_id);
@@ -47,7 +42,7 @@ const DescStage = () => {
           
           setEmployeur(employeurResponse.employeur);         
           setStageData(stage);
-          //setEtudiant(etudiant);
+        
 
         } catch (err) {
           console.error(err);
@@ -59,10 +54,6 @@ const DescStage = () => {
   }, [sendRequest, id]);
 
 
-  const handlePostulerClick = () => {
-    // Display an alert when "Postuler" button is clicked
-    window.alert(auth.userId+" "+ stageData.id);
-  };
   //Si Employeur
   if (auth.typeCompte === "Employeur") {
     console.log(stageData);
@@ -84,8 +75,11 @@ const DescStage = () => {
         <p>Nom: {stageData.nom}</p>
         <p>Prenom: {stageData.prenom}</p> */}
         </div>
-        <Link to="/Stage/Modifier">
+        <Link to={`/Stage/modifierStages/${id}`}>
           <button>Modifier</button>
+        </Link>
+        <Link to={`/Stage/deleteStages/${id}`}>
+        <button>Supprimer</button>
         </Link>
       </React.Fragment>
     );
@@ -112,8 +106,10 @@ const DescStage = () => {
           <p>Téléphone: {employeur.telephone}</p>
           
 
-          <Link to={`/${auth.userId}/${stageData._id}`}>
-          <button onClick={handlePostulerClick}>Postuler</button>
+        
+
+          <Link to={`/Stage/Postuler/${id}`}>
+          <button >Postuler</button>
           </Link>
 
         {/* <p>Courriel: {stageData.courriel}</p>
