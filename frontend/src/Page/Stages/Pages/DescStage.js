@@ -68,7 +68,16 @@ const DescStage = () => {
           <p>Payant: {stageData.payant}</p>
           <p>Modalite: {stageData.modalite}</p>
           <p>Status: {stageData.status}</p>
-
+          <ul>
+            {stageData.map((stage) => (
+              <li key={stage._id}>
+                <h2>{stage.titre}</h2>
+                <p>Nom de l'entreprise: {stage.nom_entreprise}</p>
+                <p>Description: {stage.description}</p>
+                {/* You can access and display listeEtudiants here */}
+              </li>
+            ))}
+          </ul>
           
         
 

@@ -197,7 +197,9 @@ const getEtudiantsInscrits = async (requete, reponse, next) => {
   try {
     etudiants = await Etudiant.find({});
     etudiants.forEach(etudiant => {
-      if (etudiant.listeStages.)
+      if (etudiant.listeStages.has(stageId)){
+        listeEtudiantsInscrits.push(etudiant);
+      }
     });
   } catch {
     return next(new HttpErreur("Erreur accès stages"), 500);
