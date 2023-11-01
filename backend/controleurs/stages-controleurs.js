@@ -209,7 +209,8 @@ const getEtudiantsInscrits = async (requete, reponse, next) => {
     // Créer un nouveau Map à partir du tableau trié
     listeEtudiantsInscrits = new Map(tableauTrié);
 
-  } catch {
+  } catch (err){
+    console.error(err);
     return next(new HttpErreur("Erreur accès étudiants inscrits"), 500);
   }
   // Envoyer la liste triée au frontend au format JSON
