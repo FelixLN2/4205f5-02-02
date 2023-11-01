@@ -69,6 +69,9 @@ const DescStage = () => {
           <p>Modalite: {stageData.modalite}</p>
           <p>Status: {stageData.status}</p>
 
+          
+        
+
           {/* <p>Courriel: {stageData.courriel}</p>
         <p>Employeur</p>
         <p>Nom: {stageData.nom}</p>

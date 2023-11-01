@@ -166,15 +166,27 @@ const supprimerStage = async (requete, reponse, next) => {
 
 const modifierStage = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
- 
+  const { titre, description, debut, 
+    fin, payant, modalite, nom_entreprise, status } = requete.body;
   try {
-    await Stage.findByIdAndUpdate(stageId, {titre: requete.params.titre, description: requete.params.description, debut: requete.params.debut, fin: requete.params.fin, payant: requete.params.payant, modalite: requete.params.modalite, nom_entreprise: requete.params.nom_entreprise, status: requete.params.status })
-    
+    //await Stage.findByIdAndUpdate(stageId, {titre: requete.params.titre, description: requete.params.description, debut: requete.params.debut, fin: requete.params.fin, payant: requete.params.payant, modalite: requete.params.modalite, nom_entreprise: requete.params.nom_entreprise, status: requete.params.status })
+    const stage = await Stage.findById(stageId);
+    stage.titre =  titre;
+    stage.description = description;
+    stage.debut = debut;
+    stage.fin = fin;
+    stage.payant = payant;
+    stage.modalite = modalite;
+    stage.nom_entreprise = nom_entreprise;
+    stage.status = status;
+    await stage.save();
   } catch (err) {
     const erreur = new HttpErreur(err, 500);
     return next(erreur);
   }
-  reponse.json("Stage modifié");
+  
+  // reponse.json("stage modifié");
+  reponse.status(200).json({ stage: stage.toObject({ getters: true }) });
 };
 
 const getEtudiantsInscrits = async (requete, reponse, next) => {
