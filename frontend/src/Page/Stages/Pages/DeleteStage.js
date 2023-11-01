@@ -7,22 +7,8 @@ import { AuthContext } from "../../../Shared/context/auth-context";
 
 const DeleteStage = () => {
     const { id } = useParams();
-    const { error, sendRequest, clearError } = useHttpClient();
-    const [stageData, setStageData] = useState([]);
+    const { sendRequest } = useHttpClient();
     const auth = useContext(AuthContext);
-    useEffect(() => {
-        const fetchStageData = async () => {
-          try {
-            const responseData = await sendRequest(
-              process.env.REACT_APP_BACKEND_URL + `/employeurs/stages/deleteStage/${id}`);
-            setStageData(responseData.stage);
-          } catch (err) {
-            console.error(err);
-
-          }
-        };
-        fetchStageData();
-      }, [id, sendRequest]);
 
       const history = useHistory();
       const handleDelete = async () => {

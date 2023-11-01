@@ -198,7 +198,7 @@ const getEtudiantsInscrits = async (requete, reponse, next) => {
     etudiants = await Etudiant.find({});
     etudiants.forEach(etudiant => {
       if (etudiant.listeStages.has(stageId)){
-        listeEtudiantsInscrits.push(etudiant);
+        listeEtudiantsInscrits.push({etudiant.listeStages[stageId]:etudiant});
       }
     });
   } catch {
