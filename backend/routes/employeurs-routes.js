@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get("/employeurs", controleursEmployeur.getEmployeurs);
 
+router.get("/etudiantsinscrits", controleursStage.getEtudiantsInscrits);
+
 router.get("/stages/:identifiant", controleursStage.getStagesEmployeurById);
 
 router.get("/:identifiant/:mdp", controleursEmployeur.verifMdp);

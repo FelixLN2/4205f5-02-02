@@ -4,6 +4,7 @@ import Input from "../../../Shared/Components/FormElements/Input";
 import Button from "../../../Shared/Components/FormElements/Button";
 import { useForm } from "../../../Shared/hooks/form-hook";
 import { useHttpClient } from "../../../Shared/hooks/http-hook";
+import { useParams } from "react-router-dom";
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH,
@@ -12,6 +13,7 @@ import "./StageForm.css";
 import { AuthContext } from "../../../Shared/context/auth-context";
 
 const UpdateStage = (props) => {
+    const { id } = useParams();
     const { error, sendRequest, clearError } = useHttpClient();
     const auth = useContext(AuthContext);
     const [formState, inputHandler] = useForm(
@@ -22,10 +24,6 @@ const UpdateStage = (props) => {
             },
             description: {
               value: props.description,
-              isValid: false,
-            },
-            courriel: {
-              value: props.courriel,
               isValid: false,
             },
             nom_entreprise: {
@@ -56,15 +54,14 @@ const UpdateStage = (props) => {
           false
           );
           const history = useHistory();
-
+          
           const placeSubmitHandler = async (event) => {
             event.preventDefault();
             console.log(formState.inputs);
             try {
+              const url = `${process.env.REACT_APP_BACKEND_URL}/employeurs/stages/modifierStages/${id}`;
               const responseData = await sendRequest(
-                // process.env.REACT_APP_BACKEND_URL + "/stage/",
-                // "POST",
-                process.env.REACT_APP_BACKEND_URL + "/employeurs/stages",
+                url,
                 "PATCH",
                 JSON.stringify({
                   titre: formState.inputs.titre.value,
@@ -110,16 +107,6 @@ const UpdateStage = (props) => {
                   errorText="Entrez un description valide."
                   onInput={inputHandler}
                   defaultValue={props.description}
-                />
-                <Input
-                  id="courriel"
-                  element="input"
-                  type="text"
-                  label="Courriel"
-                  validators={[VALIDATOR_REQUIRE()]}
-                  errorText="Entrez un Courriel valide."
-                  onInput={inputHandler}
-                  defaultValue={props.courriel}
                 />
                 <Input
                   id="nom_entreprise"

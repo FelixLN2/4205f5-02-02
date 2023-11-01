@@ -37,7 +37,7 @@ const getStagesEtudiant = async (requete, reponse, next) => {
   let stages;
 
   try {
-    stages = await Stage.find({});
+    stages = await Stage.find({status:"ouvert"});
   } catch {
     return next(new HttpErreur("Erreur accès stages"), 500);
   }
@@ -177,6 +177,22 @@ const modifierStage = async (requete, reponse, next) => {
   reponse.json("Stage modifié");
 };
 
+const getEtudiantsInscrits = async (requete, reponse, next) => {
+  let stages;
+
+  try {
+    stages = await Stage.find({});
+  } catch {
+    return next(new HttpErreur("Erreur accès stages"), 500);
+  }
+
+  reponse.json({
+    stages: stages.map((stage) =>
+      stage.toObject({ getters: true })
+    ),
+  });
+};
+
 
 exports.getStageById = getStageById;
 exports.getStagesEtudiant = getStagesEtudiant;
@@ -185,3 +201,4 @@ exports.creerStage = creerStage;
 exports.addEtudiant = addEtudiant;
 exports.supprimerStage = supprimerStage;
 exports.modifierStage = modifierStage;
+exports.getEtudiantsInscrits = getEtudiantsInscrits;

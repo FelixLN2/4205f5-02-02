@@ -51,9 +51,7 @@ const App = () =>{
         <NewStage />
       </Route>
       <Route path="/Stage/DescStage/:id" component={DescStage} />
-      <Route path="/Stage/Modifier" exact>
-      <UpdateStage/>
-      </Route>
+      <Route path="/Stage/modifierStages/:id" component={UpdateStage}/>
       <Redirect to="/" />
     </Switch>
   );

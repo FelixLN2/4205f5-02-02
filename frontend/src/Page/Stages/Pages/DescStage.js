@@ -21,6 +21,11 @@ const DescStage = () => {
         try {
           const url = `${process.env.REACT_APP_BACKEND_URL}/etudiants/stages/${id}`;
           const responseData = await sendRequest(url);
+          const stage = responseData.stage;
+
+          // Récupérez les etudiants ayant postulé 
+          const employeurResponse = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/employeurs/" + stage.employeur_id);
+
           setStageData(responseData.stage);
         } catch (err) {
           console.error(err);
@@ -69,14 +74,14 @@ const DescStage = () => {
         <p>Nom: {stageData.nom}</p>
         <p>Prenom: {stageData.prenom}</p> */}
         </div>
-        <Link to="/Stage/Modifier">
+        <Link to={`/Stage/modifierStages/${id}`}>
           <button>Modifier</button>
         </Link>
       </React.Fragment>
     );
   }
   //Si Etudiant
-  else {
+  else if (auth.typeCompte === "Etudiant"){
     return (
       <div>
           <h1>Détails du stage</h1>
@@ -88,7 +93,6 @@ const DescStage = () => {
           <p>Payant: {stageData.payant}</p>
           <p>Modalite: {stageData.modalite}</p>
           <p>Status: {stageData.status}</p>
-          <p>Employeur_id: {stageData.employeur_id}</p>
           <br/>
           <h2>Employeur</h2>
           <p>Nom complet: {employeur.prenom} {employeur.nom}</p>
