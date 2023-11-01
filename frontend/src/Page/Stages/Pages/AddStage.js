@@ -14,8 +14,9 @@ const AddStage = () => {
       const handleAdd = async () => {
         try {
           await sendRequest(
-            process.env.REACT_APP_BACKEND_URL + `/etudiants/stages/postuler/${auth.userId}/${id}`,
+            process.env.REACT_APP_BACKEND_URL + `/etudiants/${auth.userId}/${id}`,
             'PATCH',
+            null,
             {
               Authorization: `Bearer ${auth.token}`,
             }
