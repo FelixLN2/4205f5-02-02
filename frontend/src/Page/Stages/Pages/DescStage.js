@@ -22,7 +22,12 @@ const DescStage = () => {
         try {
           const url = `${process.env.REACT_APP_BACKEND_URL}/etudiants/stages/${id}`;
           const responseData = await sendRequest(url);
+
+          const etudiants = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/employeurs/etudiantsinscrits/" + id);
+
+          setListeEtudiants(etudiants.etudiantsInscrits);
           setStageData(responseData.stage);
+
         } catch (err) {
           console.error(err);
         }
@@ -78,12 +83,38 @@ const DescStage = () => {
           <p>Payant: {stageData.payant}</p>
           <p>Modalite: {stageData.modalite}</p>
           <p>Status: {stageData.status}</p>
+          <br/>
+          
+          <h3>Étudiants ayant postulé</h3>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <table style={{ borderCollapse: "collapse" }}>
+              <thead>
+                <tr>
+                  <th style={{ border: "1px solid #000" }}>Nom complet</th>
+                  <th style={{ border: "1px solid #000" }}>Téléphone</th>
+                  <th style={{ border: "1px solid #000" }}>Adresse courriel</th>
+                </tr>
+              </thead>
+              <tbody>
+                {listeEtudiants.map((etudiant, index) => (
+                  <tr key={index}>
+                    <td style={{ border: "1px solid #000" }}>{etudiant.prenom} {etudiant.nom}</td>
+                    <td style={{ border: "1px solid #000" }}>{etudiant.telephone}</td>
+                    <td style={{ border: "1px solid #000" }}>{etudiant.courriel}</td>
+                    {/* Ajoutez d'autres données de colonne ici */}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
 
           {/* <p>Courriel: {stageData.courriel}</p>
         <p>Employeur</p>
         <p>Nom: {stageData.nom}</p>
         <p>Prenom: {stageData.prenom}</p> */}
         </div>
+        <br/><br/>
         <Link to="/Stage/Modifier">
           <button>Modifier</button>
         </Link>
