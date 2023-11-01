@@ -25,7 +25,7 @@ const DeleteStage = () => {
             );
             setStageData(responseData.stage);
           } catch (error) {
-            //console.error(err);
+            console.error(err);
 
             // Handle error, e.g., redirect to an error page
           }
