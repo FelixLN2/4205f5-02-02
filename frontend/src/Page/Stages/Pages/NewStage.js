@@ -50,8 +50,8 @@ const NewStage = () => {
         isValid: false,
       },
       status: {
-        value: "",
-        isValid: false,
+        value: "Ouvert",
+        isValid: true,
       },
     },
     false
@@ -161,15 +161,6 @@ const NewStage = () => {
           element="input"
           type="text"
           label="modalite du stage(distance , présentiel ou hybride)"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Entrez une réponse valide."
-          onInput={inputHandler}
-        />
-        <Input
-          id="status"
-          element="input"
-          type="text"
-          label="status du stage(ouvert ou fermé)"
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Entrez une réponse valide."
           onInput={inputHandler}

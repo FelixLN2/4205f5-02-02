@@ -75,7 +75,7 @@ const verifMdp = async (requete, reponse, next) => {
 };
 
 const creerEtudiant = async (requete, reponse, next) => {
-  const {numAdmission, mdp, prenom, nom, telephone, courriel, listeStages } = requete.body;
+  const {numAdmission, mdp, prenom, nom, telephone, courriel, listeStages = new Map() } = requete.body;
   
   const nouveauEtudiant = new Etudiant({
     numAdmission,

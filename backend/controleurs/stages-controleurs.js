@@ -111,7 +111,7 @@ const getStagesEmployeurById = async (requete, reponse, next) => {
 };
 
 const creerStage = async (requete, reponse, next) => {
-  const { titre, description, employeur_id, debut, fin, payant, modalite, nom_entreprise, status, listeEtudiants = [] } = requete.body;
+  const { titre, description, employeur_id, debut, fin, payant, modalite, nom_entreprise, status, listeEtudiants = new Map() } = requete.body;
   const nouveauStage = new Stage({
     titre,
     description, 

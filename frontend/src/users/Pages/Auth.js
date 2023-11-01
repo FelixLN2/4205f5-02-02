@@ -132,7 +132,6 @@ const Auth = () => {
               courriel: formState.inputs.courriel.value,
               mdp: formState.inputs.mdp.value,
               Compte: formState.inputs.typeCompte.value,
-              listeStages: new Map()
             }),
             {
               "Content-Type": "application/json",
@@ -162,7 +161,6 @@ const Auth = () => {
               mdp: formState.inputs.mdp.value,
               departement: formState.inputs.departement.value,
               Compte: formState.inputs.typeCompte.value,
-              listeStages: new Map()
             }),
             {
               "Content-type": "application/json",
