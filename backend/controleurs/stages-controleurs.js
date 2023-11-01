@@ -56,7 +56,7 @@ const addEtudiant = async (requete, reponse, next) => {
   let stage;
   let etudiant;
   const date = new Date();
-  const today = date.getDate().toString() + "-" + (date.getMonth() + 1).toString() + "-" + date.getFullYear().toString();
+  //const today = date.getDate().toString() + "-" + (date.getMonth() + 1).toString() + "-" + date.getFullYear().toString() + "";
 
   //faire conditions pour empecher erreurs
   try{
@@ -73,8 +73,8 @@ const addEtudiant = async (requete, reponse, next) => {
     }
 
     //modifier pour les maps
-    stage.listeEtudiants.set(numAdmission, today);  
-    etudiant.listeStages.set(stageId, today);  
+    stage.listeEtudiants.set(numAdmission, date);  
+    etudiant.listeStages.set(stageId, date);  
     
     await etudiant.save();
     await stage.save();
@@ -192,20 +192,28 @@ const modifierStage = async (requete, reponse, next) => {
 const getEtudiantsInscrits = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
   let etudiants;
-  let listeEtudiantsInscrits
+  let listeEtudiantsInscrits = new Map();
 
   try {
     etudiants = await Etudiant.find({});
     etudiants.forEach(etudiant => {
       if (etudiant.listeStages.has(stageId)){
-        listeEtudiantsInscrits.push({etudiant.listeStages[stageId]:etudiant});
+        //ajoute une entrée au dictionnaire : {objetDate:objetEtudiant}
+        listeEtudiantsInscrits.set(etudiant.listeStages.get(stageId), etudiant);
       }
     });
+
+    // Convertir les clés du Map en un tableau de paires clé-valeur
+    const tableauTrié = [...listeEtudiantsInscrits.entries()].sort((a, b) => a[0] - b[0]);
+
+    // Créer un nouveau Map à partir du tableau trié
+    listeEtudiantsInscrits = new Map(tableauTrié);
+
   } catch {
     return next(new HttpErreur("Erreur accès étudiants inscrits"), 500);
   }
-  // Envoyer la liste au frontend au format JSON
-  reponse.json({ etudiantsInscrits: listeEtudiantsInscrits });
+  // Envoyer la liste triée au frontend au format JSON
+  reponse.json({ etudiantsInscrits: [...listeEtudiantsInscrits.values()] });
 };
 
 exports.getStageById = getStageById;
