@@ -206,7 +206,6 @@ const getEtudiantsInscrits = async (requete, reponse, next) => {
   });
 };
 
-
 exports.getStageById = getStageById;
 exports.getStagesEtudiant = getStagesEtudiant;
 exports.getStagesEmployeurById = getStagesEmployeurById;

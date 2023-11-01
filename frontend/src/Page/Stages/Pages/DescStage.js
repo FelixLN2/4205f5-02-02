@@ -69,16 +69,12 @@ const DescStage = () => {
           <p>Modalite: {stageData.modalite}</p>
           <p>Status: {stageData.status}</p>
 
-          
-        
-
-          {/* <p>Courriel: {stageData.courriel}</p>
-        <p>Employeur</p>
-        <p>Nom: {stageData.nom}</p>
-        <p>Prenom: {stageData.prenom}</p> */}
         </div>
         <Link to={`/Stage/modifierStages/${id}`}>
           <button>Modifier</button>
+        </Link>
+        <Link to={`/Stage/deleteStages/${id}`}>
+        <button>Supprimer</button>
         </Link>
       </React.Fragment>
     );

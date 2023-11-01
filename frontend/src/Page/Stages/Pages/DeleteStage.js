@@ -21,13 +21,10 @@ const DeleteStage = () => {
         const fetchStageData = async () => {
           try {
             const responseData = await sendRequest(
-              `employeurs/deleteStage/stages/${id}`
+              `employeurs/stages/deleteStage/${id}`
             );
             setStageData(responseData.stage);
           } catch (error) {
-            console.error(err);
-
-            // Handle error, e.g., redirect to an error page
           }
         };
         fetchStageData();
@@ -36,20 +33,15 @@ const DeleteStage = () => {
       const handleDelete = async () => {
         try {
           await sendRequest(
-            `employeurs/deleteStage/stages/${id}`,
+            `employeurs/stages/deleteStage/${id}`,
             'DELETE',
             null,
             {
               Authorization: `Bearer ${auth.token}`,
             }
           );
-    
-          // Redirect to a success page or the list of stages
-          //history.push('/success');
         } catch (error) {
-            console.error(err);
 
-          // Handle error, e.g., display an error message
         }
       };
     
