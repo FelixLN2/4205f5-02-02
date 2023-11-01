@@ -47,7 +47,7 @@ const DeleteStage = () => {
           // Redirect to a success page or the list of stages
           //history.push('/success');
         } catch (error) {
-           // console.error(err);
+            console.error(err);
 
           // Handle error, e.g., display an error message
         }

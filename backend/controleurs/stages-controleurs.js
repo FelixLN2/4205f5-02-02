@@ -182,7 +182,7 @@ const getEtudiantsInscrits = async (requete, reponse, next) => {
   let etudiants;
 
   try {
-    etudiant = await Etudiant.findOne({"numAdmission": numAdmission});
+    etudiants = await Etudiant.find({"numAdmission": numAdmission});
   } catch {
     return next(new HttpErreur("Erreur accès stages"), 500);
   }
