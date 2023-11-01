@@ -63,6 +63,11 @@ const DescStage = () => {
     fetchStageData();
   }, [sendRequest, id]);
 
+
+  const handlePostulerClick = () => {
+    // Display an alert when "Postuler" button is clicked
+    window.alert(auth.userId+" "+ stageData.id);
+  };
   //Si Employeur
   if (auth.typeCompte === "Employeur") {
     console.log(stageData);
@@ -91,6 +96,7 @@ const DescStage = () => {
   //Si Etudiant
   else if (auth.typeCompte === "Etudiant"){
     return (
+      <React.Fragment>
       <div>
           <h1>Détails du stage</h1>
           <p>Titre: {stageData.titre}</p>
@@ -108,17 +114,19 @@ const DescStage = () => {
           <p>Téléphone: {employeur.telephone}</p>
           
 
-          <Link to={`/Stage/${auth.userId}/${stageData._id}`}>
-          <button>Postuler</button>
-         </Link>
+          <Link to={`/${auth.userId}/${stageData._id}`}>
+          <button onClick={handlePostulerClick}>Postuler</button>
+          </Link>
 
         {/* <p>Courriel: {stageData.courriel}</p>
         <p>Employeur</p>
         <p>Nom: {stageData.nom}</p>
         <p>Prenom: {stageData.prenom}</p> */}
       </div>
+      </React.Fragment>
     );
   }
+ 
 };
 
 export default DescStage;
