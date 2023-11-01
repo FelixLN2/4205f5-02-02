@@ -128,8 +128,8 @@ const DescStage = () => {
           <p>Fin: {stageData.fin}</p>
           <p>Payant: {stageData.payant}</p>
           <p>Modalite: {stageData.modalite}</p>
-          <p>Status: {stageData.status}</p>
-          <p>Employeur_id: {stageData.employeur_id}</p>
+          {/* <p>Status: {stageData.status}</p>
+          <p>Employeur_id: {stageData.employeur_id}</p> */}
           <br/>
           <h2>Employeur</h2>
           <p>Nom complet: {employeur.prenom} {employeur.nom}</p>
