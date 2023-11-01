@@ -89,6 +89,7 @@ const DescStage = () => {
         <Link to={`/Stage/modifierStages/${id}`}>
           <button>Modifier</button>
         </Link>
+        
       </React.Fragment>
     );
   }

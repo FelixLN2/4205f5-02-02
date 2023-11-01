@@ -202,14 +202,10 @@ const getEtudiantsInscrits = async (requete, reponse, next) => {
       }
     });
   } catch {
-    return next(new HttpErreur("Erreur accès stages"), 500);
+    return next(new HttpErreur("Erreur accès étudiants inscrits"), 500);
   }
-
-  reponse.json({
-    stages: stages.map((stage) =>
-      stage.toObject({ getters: true })
-    ),
-  });
+  // Envoyer la liste au frontend au format JSON
+  reponse.json({ etudiantsInscrits: listeEtudiantsInscrits });
 };
 
 
