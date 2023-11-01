@@ -16,7 +16,9 @@ const DeleteStage = () => {
               `employeurs/stages/deleteStage/${id}`
             );
             setStageData(responseData.stage);
-          } catch (error) {
+          } catch (err) {
+            console.error(err);
+
           }
         };
         fetchStageData();
@@ -32,7 +34,8 @@ const DeleteStage = () => {
               Authorization: `Bearer ${auth.token}`,
             }
           );
-        } catch (error) {
+        } catch (err) {
+          console.error(err);
 
         }
       };
