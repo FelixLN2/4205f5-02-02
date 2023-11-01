@@ -68,7 +68,6 @@ const DescStage = () => {
           <p>Payant: {stageData.payant}</p>
           <p>Modalite: {stageData.modalite}</p>
           <p>Status: {stageData.status}</p>
-
         </div>
         <Link to={`/Stage/modifierStages/${id}`}>
           <button>Modifier</button>

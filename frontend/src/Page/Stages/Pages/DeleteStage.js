@@ -1,16 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import Input from "../../../Shared/Components/FormElements/Input";
-import Button from "../../../Shared/Components/FormElements/Button";
-import { useForm } from "../../../Shared/hooks/form-hook";
-import { useHttpClient } from "../../../Shared/hooks/http-hook";
 import { useParams } from "react-router-dom";
-import {
-  VALIDATOR_REQUIRE,
-  VALIDATOR_MINLENGTH,
-} from "../../../Shared/util/validators";
-import "./StageForm.css";
+import { useHttpClient } from "../../../Shared/hooks/http-hook";
 import { AuthContext } from "../../../Shared/context/auth-context";
+
 
 const DeleteStage = () => {
     const { id } = useParams();

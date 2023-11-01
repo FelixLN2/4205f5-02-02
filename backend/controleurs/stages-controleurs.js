@@ -93,7 +93,7 @@ const getStagesEmployeurById = async (requete, reponse, next) => {
   let stages;
 
   try {
-    stages = await Stage.find({employeur_id:identifiant});
+    stages = await Stage.find({"employeur_id":identifiant});
   } catch (err){
     return next(new HttpErreur("Erreur accès stages" + err), 500);
   }
@@ -185,25 +185,27 @@ const modifierStage = async (requete, reponse, next) => {
     return next(erreur);
   }
   
-  //reponse.json("stage modifié");
-  reponse.status(201).json({ stage: nouveauStage });
+  reponse.json("stage modifié");
+  //reponse.status(201).json({ stage: nouveauStage });
 };
 
 const getEtudiantsInscrits = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
   let etudiants;
+  let listeEtudiantsInscrits
 
   try {
-    etudiants = await Etudiant.find({"numAdmission": numAdmission});
+    etudiants = await Etudiant.find({});
+    etudiants.forEach(etudiant => {
+      if (etudiant.listeStages.has(stageId)){
+        listeEtudiantsInscrits.push(etudiant);
+      }
+    });
   } catch {
-    return next(new HttpErreur("Erreur accès stages"), 500);
+    return next(new HttpErreur("Erreur accès étudiants inscrits"), 500);
   }
-
-  reponse.json({
-    stages: stages.map((stage) =>
-      stage.toObject({ getters: true })
-    ),
-  });
+  // Envoyer la liste au frontend au format JSON
+  reponse.json({ etudiantsInscrits: listeEtudiantsInscrits });
 };
 
 exports.getStageById = getStageById;
