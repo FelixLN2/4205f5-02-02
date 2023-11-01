@@ -66,6 +66,11 @@ const addEtudiant = async (requete, reponse, next) => {
     stage = await Stage.findById(stageId);
     etudiant = await Etudiant.findOne({"numAdmission": numAdmission});
 
+    if (!stage || !etudiant) {
+      // Vérifiez si stage ou etudiant n'a pas été trouvé
+      return next(new HttpErreur("Stage ou étudiant non trouvé"), 404);
+    }
+
     //Si déjà présent
     if(stage.listeEtudiants.has(numAdmission) && etudiant.listeStages.has(stageId)){
       //deja dans la liste, ne peut postuler
