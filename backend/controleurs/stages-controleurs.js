@@ -185,8 +185,8 @@ const modifierStage = async (requete, reponse, next) => {
     return next(erreur);
   }
   
-  // reponse.json("stage modifié");
-  reponse.status(200).json({ stage: stage.toObject({ getters: true }) });
+  //reponse.json("stage modifié");
+  reponse.status(201).json({ stage: nouveauStage });
 };
 
 
