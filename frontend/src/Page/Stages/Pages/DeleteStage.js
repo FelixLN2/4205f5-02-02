@@ -16,7 +16,9 @@ const DeleteStage = () => {
             const responseData = await sendRequest(
               process.env.REACT_APP_BACKEND_URL + `/employeurs/stages/deleteStage/${id}`);
             setStageData(responseData.stage);
-          } catch (error) {
+          } catch (err) {
+            console.error(err);
+
           }
         };
         fetchStageData();
