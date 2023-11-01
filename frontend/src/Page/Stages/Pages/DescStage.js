@@ -108,7 +108,7 @@ const DescStage = () => {
           <p>Téléphone: {employeur.telephone}</p>
           
 
-          <Link to={`/etudiants/${auth.userId}/${stageData._id}`}>
+          <Link to={`/Stage/${auth.userId}/${stageData._id}`}>
           <button>Postuler</button>
          </Link>
 
