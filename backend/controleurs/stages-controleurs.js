@@ -174,7 +174,8 @@ const modifierStage = async (requete, reponse, next) => {
     const erreur = new HttpErreur(err, 500);
     return next(erreur);
   }
-  reponse.json("Stage modifié");
+
+  reponse.status(201).json({ stage: nouveauStage });
 };
 
 

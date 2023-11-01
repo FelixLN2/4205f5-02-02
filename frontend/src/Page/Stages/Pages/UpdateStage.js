@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
+
 import Input from "../../../Shared/Components/FormElements/Input";
 import Button from "../../../Shared/Components/FormElements/Button";
 import { useForm } from "../../../Shared/hooks/form-hook";
@@ -12,6 +13,7 @@ import "./StageForm.css";
 import { AuthContext } from "../../../Shared/context/auth-context";
 
 const UpdateStage = (props) => {
+
     const { error, sendRequest, clearError } = useHttpClient();
     const auth = useContext(AuthContext);
     const [formState, inputHandler] = useForm(
@@ -60,11 +62,13 @@ const UpdateStage = (props) => {
           const placeSubmitHandler = async (event) => {
             event.preventDefault();
             console.log(formState.inputs);
+            console.log(process.env.REACT_APP_BACKEND_URL);
+       
             try {
               const responseData = await sendRequest(
                 // process.env.REACT_APP_BACKEND_URL + "/stage/",
                 // "POST",
-                process.env.REACT_APP_BACKEND_URL + "/employeurs/stages",
+                process.env.REACT_APP_BACKEND_URL + "/employeurs/stages/modifierStages/" ,
                 "PATCH",
                 JSON.stringify({
                   titre: formState.inputs.titre.value,
@@ -171,6 +175,7 @@ const UpdateStage = (props) => {
                   onInput={inputHandler}
                   defaultValue={props.modalite}
                 />
+                
                 <Input
                   id="status"
                   element="input"
