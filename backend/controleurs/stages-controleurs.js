@@ -192,11 +192,11 @@ const modifierStage = async (requete, reponse, next) => {
 const getEtudiantsInscrits = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
   let etudiants;
-  let listeStagesEtudiants
+  let dictionnaireListeStagesEtudiants
 
   try {
     etudiants = await Etudiant.find({});
-    
+
   } catch {
     return next(new HttpErreur("Erreur accès stages"), 500);
   }
