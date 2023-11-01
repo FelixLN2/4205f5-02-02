@@ -93,7 +93,7 @@ const getStagesEmployeurById = async (requete, reponse, next) => {
   let stages;
 
   try {
-    stages = await Stage.find({employeur_id:identifiant});
+    stages = await Stage.find({"employeur_id":identifiant});
   } catch (err){
     return next(new HttpErreur("Erreur accès stages" + err), 500);
   }
@@ -192,9 +192,11 @@ const modifierStage = async (requete, reponse, next) => {
 const getEtudiantsInscrits = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
   let etudiants;
+  let listeStagesEtudiants
 
   try {
-    etudiants = await Etudiant.find({"numAdmission": numAdmission});
+    etudiants = await Etudiant.find({});
+    
   } catch {
     return next(new HttpErreur("Erreur accès stages"), 500);
   }
