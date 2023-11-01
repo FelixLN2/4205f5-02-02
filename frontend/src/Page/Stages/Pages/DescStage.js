@@ -106,7 +106,7 @@ const DescStage = () => {
         <p>Prenom: {stageData.prenom}</p> */}
         </div>
         <br/><br/>
-        <Link to="/Stage/Modifier">
+        <Link to={`/Stage/modifierStages/${id}`}>
           <button>Modifier</button>
         </Link>
         <Link to={`/Stage/deleteStages/${id}`}>
