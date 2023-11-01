@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useHttpClient } from "../../../Shared/hooks/http-hook";
 import { AuthContext } from "../../../Shared/context/auth-context";
@@ -13,8 +14,7 @@ const DeleteStage = () => {
         const fetchStageData = async () => {
           try {
             const responseData = await sendRequest(
-              `employeurs/stages/deleteStage/${id}`
-            );
+              process.env.REACT_APP_BACKEND_URL + `/employeurs/stages/deleteStage/${id}`);
             setStageData(responseData.stage);
           } catch (error) {
           }
@@ -22,16 +22,17 @@ const DeleteStage = () => {
         fetchStageData();
       }, [id, sendRequest]);
 
+      const history = useHistory();
       const handleDelete = async () => {
         try {
           await sendRequest(
-            `employeurs/stages/deleteStage/${id}`,
+            process.env.REACT_APP_BACKEND_URL + `/employeurs/stages/deleteStage/${id}`,
             'DELETE',
-            null,
             {
               Authorization: `Bearer ${auth.token}`,
             }
           );
+          history.push(`/Stage/liste`);
         } catch (error) {
 
         }
