@@ -185,8 +185,8 @@ const modifierStage = async (requete, reponse, next) => {
     return next(erreur);
   }
   
-  //reponse.json("stage modifié");
-  reponse.status(201).json({ stage: nouveauStage });
+  reponse.json("stage modifié");
+  //reponse.status(201).json({ stage: nouveauStage });
 };
 
 const getEtudiantsInscrits = async (requete, reponse, next) => {
