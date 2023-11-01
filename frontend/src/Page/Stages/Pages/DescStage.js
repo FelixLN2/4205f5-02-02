@@ -11,6 +11,7 @@ const DescStage = () => {
   const { error, sendRequest, clearError } = useHttpClient();
   const [stageData, setStageData] = useState([]);
   const [employeur, setEmployeur] = useState([]);
+  const [etudiant, setEtudiant] = useState([]);
   const [listeEtudiants, setListeEtudiants] = useState([{}]);
   const auth = useContext(AuthContext);
 
@@ -32,6 +33,13 @@ const DescStage = () => {
           const url = `${process.env.REACT_APP_BACKEND_URL}/etudiants/stages/${id}`;
           const responseData = await sendRequest(url);
           const stage = responseData.stage;
+
+          /*const testUrl = `${process.env.REACT_APP_BACKEND_URL}/etudiants/stages/${id}`;
+          const testResponseData = await sendRequest(testUrl);
+          const etudiant = testResponseData.etudiant;*/
+          console.log(responseData);
+          console.log(id);
+          console.log(auth.userId);
           
           // Récupérez l'employeur correspondant au stage
           const employeurResponse = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/employeurs/" + stage.employeur_id);
@@ -39,6 +47,7 @@ const DescStage = () => {
           
           setEmployeur(employeurResponse.employeur);         
           setStageData(stage);
+          //setEtudiant(etudiant);
 
         } catch (err) {
           console.error(err);
@@ -51,12 +60,13 @@ const DescStage = () => {
 
   //Si Employeur
   if (auth.typeCompte === "Employeur") {
+    console.log(stageData);
     return (
       <React.Fragment>
         <div>
           <h1>Détails du stage</h1>
           <p>Titre: {stageData.titre}</p>
-          <p>Nom de l'entreprise:: {stageData.nom_entreprise}</p>
+          <p>Nom de l'entreprise: {stageData.nom_entreprise}</p>
           <p>Description: {stageData.description}</p>
           <p>Debut: {stageData.debut}</p>
           <p>Fin: {stageData.fin}</p>
@@ -94,7 +104,11 @@ const DescStage = () => {
           <p>Nom complet: {employeur.prenom} {employeur.nom}</p>
           <p>Courriel: {employeur.courriel}</p>
           <p>Téléphone: {employeur.telephone}</p>
+          
 
+          <Link to={`/Stage/${auth.userId}/${stageData._id}`}>
+          <button>Postuler</button>
+         </Link>
 
         {/* <p>Courriel: {stageData.courriel}</p>
         <p>Employeur</p>
