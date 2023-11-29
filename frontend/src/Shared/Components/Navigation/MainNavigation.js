@@ -8,7 +8,7 @@ return (
     <React.Fragment>
         <MainHeader>
             <h1>
-                <Link to="/">College Montmorency</Link>
+                <Link to="/4205f5-02-02/">College Montmorency</Link>
             </h1>
             <nav>
                 <NavLinks/>

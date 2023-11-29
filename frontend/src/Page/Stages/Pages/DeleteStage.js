@@ -20,7 +20,7 @@ const DeleteStage = () => {
               Authorization: `Bearer ${auth.token}`,
             }
           );
-          history.push(`/Stage/liste`);
+          history.push(`/Stage/listePostuler`);
         } catch (error) {
 
         }

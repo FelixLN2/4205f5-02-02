@@ -63,7 +63,7 @@ const App = () =>{
       <Route path="/Stage/DeleteStages/:id" component={DeleteStage}/>
       <Route path="/Stage/Postuler/:id" component={PostulerStage}/>
       <Route path="/Stage/Retirer/:id" component={RetirerStage}/>
-      <Redirect to="/" />
+      <Redirect to="/4205f5-02-02/" />
     </Switch>
   );
 

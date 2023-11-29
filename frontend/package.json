@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "https://FelixLN2.github.io/4205f5-02-02",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
