@@ -22,7 +22,8 @@ const AddStage = () => {
         }
       );
       if (response) {
-        setAlertMessage("Étudiant a postulé avec succès au stage!");
+        alert("Étudiant a postulé avec succès au stage!")
+       // setAlertMessage("Étudiant a postulé avec succès au stage!");
 
       }
       setTimeout(() => {
@@ -30,7 +31,8 @@ const AddStage = () => {
       }, 3000);
     } catch (error) {
       console.error(error);
-      setAlertMessage("Une erreur s'est produite lors de la postulation.");
+      alert("Une erreur s'est produite lors de la postulation.")
+      //setAlertMessage("Une erreur s'est produite lors de la postulation.");
     }
   };
 

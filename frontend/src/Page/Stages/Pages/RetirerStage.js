@@ -24,14 +24,16 @@ const RetirerStage = () => {
 
       
       if (response) {
-        setAlertMessage("Étudiant a retiré sa candidature !");
+        alert("Étudiant a retiré sa candidature !")
+        //setAlertMessage("Étudiant a retiré sa candidature !");
       }
       setTimeout(() => {
         history.push(`/Stage/liste`);
       }, 3000);
     } catch (error) {
       console.error(error);
-      setAlertMessage("Une erreur s'est produite lors du retrait de la candidature.");
+      alert("Une erreur s'est produite lors du retrait de la candidature.")
+      //setAlertMessage("Une erreur s'est produite lors du retrait de la candidature.");
     }
   };
 
