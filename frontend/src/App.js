@@ -14,7 +14,7 @@ import Stages from "./Page/Stages/Pages/ListeStage";
 import DescStage from "./Page/Stages/Pages/DescStage";
 import UpdateStage from "./Page/Stages/Pages/UpdateStage";
 import DeleteStage from "./Page/Stages/Pages/DeleteStage";
-import AddStage from "./Page/Stages/Pages/AddStage";
+import PostulerStage from "./Page/Stages/Pages/PostulerStage";
 import ListePostuler from "./Page/Stages/Pages/ListePostuler";
 
 import  { AuthContext } from "./Shared/context/auth-context";
@@ -60,7 +60,7 @@ const App = () =>{
       <Route path="/Stage/DescStage/:id" component={DescStage} />
       <Route path="/Stage/modifierStages/:id" component={UpdateStage}/>
       <Route path="/Stage/DeleteStages/:id" component={DeleteStage}/>
-      <Route path="/Stage/Postuler/:id" component={AddStage}/>
+      <Route path="/Stage/Postuler/:id" component={PostulerStage}/>
       <Redirect to="/" />
     </Switch>
   );

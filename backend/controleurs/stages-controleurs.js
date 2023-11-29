@@ -222,6 +222,8 @@ const getEtudiantsInscrits = async (requete, reponse, next) => {
   reponse.json({ etudiantsInscrits: [...listeEtudiantsInscrits.values()] });
 };
 
+
+
 exports.getStageById = getStageById;
 exports.getStagesEtudiant = getStagesEtudiant;
 exports.getStagesEmployeurById = getStagesEmployeurById;

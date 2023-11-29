@@ -139,8 +139,13 @@ const DescStage = () => {
 
         
 
+            
           <Link to={`/Stage/Postuler/${id}`}>
           <button >Postuler</button>
+          </Link>
+
+          <Link to={`/Stage/Retirer/${id}`}>
+          <button >Retirer ma candidature</button>
           </Link>
 
         {/* <p>Courriel: {stageData.courriel}</p>
@@ -150,6 +155,8 @@ const DescStage = () => {
       </div>
       </React.Fragment>
     );
+
+   
   }
  
 };
