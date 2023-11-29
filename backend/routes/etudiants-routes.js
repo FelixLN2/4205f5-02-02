@@ -10,7 +10,7 @@ router.get("/stages", controleursStage.getStagesEtudiant);
 
 router.get("/stages/:stageId", controleursStage.getStageById);
 
-router.get("/stagesPostules/:identifiant", controleursStage.getStagesPostules)
+router.get("/stagesPostules/:numAdmission", controleursStage.getStagesPostules)
 
 router.get("/:numAdmission/:mdp", controleursEtudiant.verifMdp);
 
