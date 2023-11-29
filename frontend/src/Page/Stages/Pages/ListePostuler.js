@@ -46,7 +46,7 @@ const ListePostuler = () => {
     <React.Fragment>
       {stages && <StageList items={stages} />}
         <div>
-            <h1>Liste de stage postuler</h1>
+            <h1>Liste des stages auxquels vous avez postulé</h1>
         </div>
     </React.Fragment>
   );
