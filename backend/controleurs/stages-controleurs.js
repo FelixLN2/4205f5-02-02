@@ -223,12 +223,87 @@ const getEtudiantsInscrits = async (requete, reponse, next) => {
 };
 
 
+const removeEtudiant = async (requete, reponse, next) => {
+  const stageId = requete.params.stageId;
+  const numAdmission = requete.params.numAdmission;
+  let stage;
+  let etudiant;
+
+  try{
+
+
+    stage = await Stage.findById(stageId);
+    etudiant = await Etudiant.findOne({"numAdmission": numAdmission});
+
+    if (!stage || !etudiant) {
+      // Vérifiez si stage ou etudiant n'a pas été trouvé
+      return next(new HttpErreur("Stage ou étudiant non trouvé"), 404);
+    }
+
+    //Si pas appliqué
+    if(!stage.listeEtudiants.has(numAdmission) && !etudiant.listeStages.has(stageId)){
+      
+      //deja dans la liste, ne peut postuler
+      return next(new HttpErreur("Étudiant n'a pas appliqué auparavant"),500);
+    }
+
+
+    
+
+    stage.listeEtudiants.delete(numAdmission);
+    etudiant.listeStages.delete(stageId);
+    
+    await etudiant.save();
+    await stage.save();
+    
+     
+  }catch (err) {
+    return next(new HttpErreur("Erreur retrait id etudiant de listeEtudiants ou vice versa " + err), 500);
+  }
+  reponse.status(200).json({ stage: stage.toObject({ getters: true }), etudiant: etudiant.toObject({ getters: true }) });
+  //reponse.status(200).json({ etudiant: etudiant.toObject({ getters: true }) }); 
+};
+
+const getStagesPostules = async (requete, reponse, next) => {
+  const numAdmission = requete.params.numAdmission;
+  let etudiant;
+  let listeStagesPostules = new Set();
+
+  try {
+    etudiant = await Etudiant.findOne({ "numAdmission": numAdmission });
+
+    if (!etudiant) {
+      return next(new HttpErreur("Aucun étudiant trouvé pour le numéro d'admission fourni", 404));
+    }
+
+    etudiant.listeStages.forEach((date, stageId) => {
+      listeStagesPostules.add(stageId);
+    });
+
+  } catch (err) {
+    console.error(err);
+    return next(new HttpErreur("Erreur accès stages postulés"), 500);
+  }
+
+  // Récupérer les objets stages correspondants aux stageIds
+  const stagesPostules = await Stage.find({ '_id': { $in: [...listeStagesPostules] } });
+
+  reponse.json({
+    stages: stagesPostules.map((stage) =>
+      stage.toObject({ getters: true })
+    ),
+  });
+};
+
+
 
 exports.getStageById = getStageById;
 exports.getStagesEtudiant = getStagesEtudiant;
 exports.getStagesEmployeurById = getStagesEmployeurById;
+exports.getStagesPostules = getStagesPostules;
 exports.creerStage = creerStage;
 exports.addEtudiant = addEtudiant;
 exports.supprimerStage = supprimerStage;
 exports.modifierStage = modifierStage;
 exports.getEtudiantsInscrits = getEtudiantsInscrits;
+exports.removeEtudiant = removeEtudiant;

@@ -12,7 +12,7 @@ const ListePostuler = () => {
     const recupererStages = async () => {
       try {
         const responseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + "/etudiants/stages"
+          process.env.REACT_APP_BACKEND_URL + "/etudiants/stagesPostules/" + auth.userId
         );
         // Récupérez les stages
         const stagesData = responseData.stages;
@@ -44,8 +44,12 @@ const ListePostuler = () => {
 
   return (
     <React.Fragment>
+       <div>
+            <h1>Liste des stages auxquels vous avez postulé</h1>
+        </div>
       {stages && <StageList items={stages} />}
-      </React.Fragment>
+       
+    </React.Fragment>
   );
 };
 
