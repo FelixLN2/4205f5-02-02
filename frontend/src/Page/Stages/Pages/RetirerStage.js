@@ -12,16 +12,19 @@ const RetirerStage = () => {
 
   const handleRemove = async () => {
     try {
+
       const response = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + `/etudiants/${auth.userId}/Retirer/${id}`,
+        process.env.REACT_APP_BACKEND_URL + `/etudiants/${auth.userId}/${id}`,
         'PATCH',
         null,
         {
           Authorization: `Bearer ${auth.token}`,
         }
       );
+
+      
       if (response) {
-        setAlertMessage("Étudiant a retiré sa candidature .!");
+        setAlertMessage("Étudiant a retiré sa candidature !");
       }
       setTimeout(() => {
         history.push(`/Stage/liste`);

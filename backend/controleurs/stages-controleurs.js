@@ -228,13 +228,9 @@ const removeEtudiant = async (requete, reponse, next) => {
   const numAdmission = requete.params.numAdmission;
   let stage;
   let etudiant;
-  const date = new Date();
-  //const today = date.getDate().toString() + "-" + (date.getMonth() + 1).toString() + "-" + date.getFullYear().toString() + "";
 
-  //faire conditions pour empecher erreurs
   try{
-    //decider si on veut le stageid ou le titre
-    //faut stageid qui existe et numadission qui existe
+
 
     stage = await Stage.findById(stageId);
     etudiant = await Etudiant.findOne({"numAdmission": numAdmission});
@@ -244,7 +240,7 @@ const removeEtudiant = async (requete, reponse, next) => {
       return next(new HttpErreur("Stage ou étudiant non trouvé"), 404);
     }
 
-    //Si déjà présent
+    //Si pas appliqué
     if(!stage.listeEtudiants.has(numAdmission) && !etudiant.listeStages.has(stageId)){
       
       //deja dans la liste, ne peut postuler
@@ -264,36 +260,40 @@ const removeEtudiant = async (requete, reponse, next) => {
   }catch (err) {
     return next(new HttpErreur("Erreur retrait id etudiant de listeEtudiants ou vice versa " + err), 500);
   }
+  reponse.status(200).json({ stage: stage.toObject({ getters: true }), etudiant: etudiant.toObject({ getters: true }) });
+  //reponse.status(200).json({ etudiant: etudiant.toObject({ getters: true }) }); 
 };
 
 const getStagesPostules = async (requete, reponse, next) => {
-  const stageId = requete.params.stageId;
-  let etudiants;
-  let listeEtudiantsInscrits = new Map();
+  const numAdmission = requete.params.numAdmission;
+  let etudiant;
+  let listeStagesPostules = new Set();
 
   try {
-    etudiants = await Etudiant.find({});
-    etudiants.forEach(etudiant => {
-      if (etudiant.listeStages.has(stageId)){
-        //ajoute une entrée au dictionnaire : {objetDate:objetEtudiant}
-        listeEtudiantsInscrits.set(etudiant.listeStages.get(stageId), etudiant);
-      }
+    etudiant = await Etudiant.findOne({ "numAdmission": numAdmission });
+
+    if (!etudiant) {
+      return next(new HttpErreur("Aucun étudiant trouvé pour le numéro d'admission fourni", 404));
+    }
+
+    etudiant.listeStages.forEach((date, stageId) => {
+      listeStagesPostules.add(stageId);
     });
 
-    // Convertir les clés du Map en un tableau de paires clé-valeur
-    const tableauTrié = [...listeEtudiantsInscrits.entries()].sort((a, b) => a[0] - b[0]);
-
-    // Créer un nouveau Map à partir du tableau trié
-    listeEtudiantsInscrits = new Map(tableauTrié);
-
-  } catch (err){
+  } catch (err) {
     console.error(err);
-    return next(new HttpErreur("Erreur accès étudiants inscrits"), 500);
+    return next(new HttpErreur("Erreur accès stages postulés"), 500);
   }
-  // Envoyer la liste triée au frontend au format JSON
-  reponse.json({ etudiantsInscrits: [...listeEtudiantsInscrits.values()] });
-};
 
+  // Récupérer les objets stages correspondants aux stageIds
+  const stagesPostules = await Stage.find({ '_id': { $in: [...listeStagesPostules] } });
+
+  reponse.json({
+    stages: stagesPostules.map((stage) =>
+      stage.toObject({ getters: true })
+    ),
+  });
+};
 
 
 

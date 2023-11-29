@@ -11,6 +11,7 @@ const AddStage = () => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const handleAdd = async () => {
+
     try {
       const response = await sendRequest(
         process.env.REACT_APP_BACKEND_URL + `/etudiants/${auth.userId}/${id}`,
@@ -22,6 +23,7 @@ const AddStage = () => {
       );
       if (response) {
         setAlertMessage("Étudiant a postulé avec succès au stage!");
+
       }
       setTimeout(() => {
         history.push(`/Stage/liste`);

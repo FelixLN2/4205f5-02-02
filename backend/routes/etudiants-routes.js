@@ -18,11 +18,11 @@ router.get("/:numAdmission", controleursEtudiant.getEtudiantById);
 
 router.post('/', controleursEtudiant.creerEtudiant);
 
-router.patch("/:numAdmission/Retirer/:stageId", controleursStage.removeEtudiant);
-
-router.patch("/:numAdmission/:stageId", controleursStage.addEtudiant);
 
 
+//router.patch("/:numAdmission/:stageId", controleursStage.addEtudiant);
+
+router.patch("/:numAdmission/:stageId", controleursStage.removeEtudiant);
 
 //router.patch('/:numAdmission', controleursEtudiant.updateEtudiant);
 
