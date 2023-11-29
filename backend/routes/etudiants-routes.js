@@ -10,14 +10,19 @@ router.get("/stages", controleursStage.getStagesEtudiant);
 
 router.get("/stages/:stageId", controleursStage.getStageById);
 
+router.get("/stagesPostules/:identifiant", controleursStage.getStagesPostules)
+
 router.get("/:numAdmission/:mdp", controleursEtudiant.verifMdp);
 
 router.get("/:numAdmission", controleursEtudiant.getEtudiantById);
 
 router.post('/', controleursEtudiant.creerEtudiant);
 
+router.patch("/:numAdmission/Retirer/:stageId", controleursStage.removeEtudiant);
 
 router.patch("/:numAdmission/:stageId", controleursStage.addEtudiant);
+
+
 
 //router.patch('/:numAdmission', controleursEtudiant.updateEtudiant);
 

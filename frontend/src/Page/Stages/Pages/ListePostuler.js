@@ -9,7 +9,7 @@ const ListePostuler = () => {
   return (
     <React.Fragment>
         <div>
-            <h1>Liste de stage postuler</h1>
+            <h1>Liste de stages auxquels vous avez postulé</h1>
         </div>
     </React.Fragment>
   );

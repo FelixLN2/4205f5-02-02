@@ -223,12 +223,86 @@ const getEtudiantsInscrits = async (requete, reponse, next) => {
 };
 
 
+const removeEtudiant = async (requete, reponse, next) => {
+  const stageId = requete.params.stageId;
+  const numAdmission = requete.params.numAdmission;
+  let stage;
+  let etudiant;
+  const date = new Date();
+  //const today = date.getDate().toString() + "-" + (date.getMonth() + 1).toString() + "-" + date.getFullYear().toString() + "";
+
+  //faire conditions pour empecher erreurs
+  try{
+    //decider si on veut le stageid ou le titre
+    //faut stageid qui existe et numadission qui existe
+
+    stage = await Stage.findById(stageId);
+    etudiant = await Etudiant.findOne({"numAdmission": numAdmission});
+
+    if (!stage || !etudiant) {
+      // Vérifiez si stage ou etudiant n'a pas été trouvé
+      return next(new HttpErreur("Stage ou étudiant non trouvé"), 404);
+    }
+
+    //Si déjà présent
+    if(stage.listeEtudiants.has(numAdmission) && etudiant.listeStages.has(stageId)){
+      //deja dans la liste, ne peut postuler
+      return next(new HttpErreur("Étudiant n'a pas appliqué auparavant"),500);
+    }
+
+
+    
+
+    stage.listeEtudiants.delete(numAdmission);
+    etudiant.listeStages.delete(stageId);
+    
+    await etudiant.save();
+    await stage.save();
+    
+     
+  }catch (err) {
+    return next(new HttpErreur("Erreur retrait id etudiant de listeEtudiants ou vice versa " + err), 500);
+  }
+};
+
+const getStagesPostules = async (requete, reponse, next) => {
+  const stageId = requete.params.stageId;
+  let etudiants;
+  let listeEtudiantsInscrits = new Map();
+
+  try {
+    etudiants = await Etudiant.find({});
+    etudiants.forEach(etudiant => {
+      if (etudiant.listeStages.has(stageId)){
+        //ajoute une entrée au dictionnaire : {objetDate:objetEtudiant}
+        listeEtudiantsInscrits.set(etudiant.listeStages.get(stageId), etudiant);
+      }
+    });
+
+    // Convertir les clés du Map en un tableau de paires clé-valeur
+    const tableauTrié = [...listeEtudiantsInscrits.entries()].sort((a, b) => a[0] - b[0]);
+
+    // Créer un nouveau Map à partir du tableau trié
+    listeEtudiantsInscrits = new Map(tableauTrié);
+
+  } catch (err){
+    console.error(err);
+    return next(new HttpErreur("Erreur accès étudiants inscrits"), 500);
+  }
+  // Envoyer la liste triée au frontend au format JSON
+  reponse.json({ etudiantsInscrits: [...listeEtudiantsInscrits.values()] });
+};
+
+
+
 
 exports.getStageById = getStageById;
 exports.getStagesEtudiant = getStagesEtudiant;
 exports.getStagesEmployeurById = getStagesEmployeurById;
+exports.getStagesPostules = getStagesPostules;
 exports.creerStage = creerStage;
 exports.addEtudiant = addEtudiant;
 exports.supprimerStage = supprimerStage;
 exports.modifierStage = modifierStage;
 exports.getEtudiantsInscrits = getEtudiantsInscrits;
+exports.removeEtudiant = removeEtudiant;
