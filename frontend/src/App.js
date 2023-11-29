@@ -42,7 +42,7 @@ const App = () =>{
   
   routes = (
     <Switch>
-      <Route path="/" exact>
+      <Route path="/4205f5-02-02/" exact>
         <Accueil />
       </Route>
       <Route path="/Auth" exact>
