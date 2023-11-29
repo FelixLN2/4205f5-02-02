@@ -14,7 +14,7 @@ const RetirerStage = () => {
     try {
 
       const response = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + `/etudiants/${auth.userId}/${id}`,
+        process.env.REACT_APP_BACKEND_URL + `/etudiants/${auth.userId}/Retirer/${id}`,
         'PATCH',
         null,
         {
