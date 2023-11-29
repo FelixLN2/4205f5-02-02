@@ -245,7 +245,8 @@ const removeEtudiant = async (requete, reponse, next) => {
     }
 
     //Si déjà présent
-    if(stage.listeEtudiants.has(numAdmission) && etudiant.listeStages.has(stageId)){
+    if(!stage.listeEtudiants.has(numAdmission) && !etudiant.listeStages.has(stageId)){
+      stage.listeEtudiants.has
       //deja dans la liste, ne peut postuler
       return next(new HttpErreur("Étudiant n'a pas appliqué auparavant"),500);
     }
