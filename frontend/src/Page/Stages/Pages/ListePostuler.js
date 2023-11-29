@@ -12,7 +12,7 @@ const ListePostuler = () => {
     const recupererStages = async () => {
       try {
         const responseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + "/etudiants/stages"
+          process.env.REACT_APP_BACKEND_URL + "/etudiants/stagesPostules/" + auth.userId
         );
         // Récupérez les stages
         const stagesData = responseData.stages;

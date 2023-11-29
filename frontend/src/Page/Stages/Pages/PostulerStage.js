@@ -26,9 +26,9 @@ const AddStage = () => {
        // setAlertMessage("Étudiant a postulé avec succès au stage!");
 
       }
-      setTimeout(() => {
-        history.push(`/Stage/liste`);
-      }, 3000);
+      /*setTimeout(() => {
+        history.push(`/Stage/listePostuler`);
+      }, 3000);*/
     } catch (error) {
       console.error(error);
       alert("Une erreur s'est produite lors de la postulation.")
