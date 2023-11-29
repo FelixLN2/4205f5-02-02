@@ -30,7 +30,9 @@ function NavLinks(props){
                 <li>
                     <NavLink to="/Stage/liste">Stages</NavLink>
                 </li>
-                
+                <li>
+                    <NavLink to="/Stage/ListePostuler">Stages postuler</NavLink>
+                </li>
             </ul>
         }
     }
