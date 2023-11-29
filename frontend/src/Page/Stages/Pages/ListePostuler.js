@@ -1,15 +1,52 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useHttpClient } from "../../../Shared/hooks/http-hook";
+import StageList from "../Components/StageList";
 import { AuthContext } from "../../../Shared/context/auth-context";
-import Card from "../../../Shared/Components/UIElements/Card";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const ListePostuler = () => {
+  const { error, sendRequest, clearError } = useHttpClient();
+  const [stages, setStages] = useState([]);
+  const auth = useContext(AuthContext);
+
+  useEffect(() => {
+    const recupererStages = async () => {
+      try {
+        const responseData = await sendRequest(
+          process.env.REACT_APP_BACKEND_URL + "/etudiants/stages"
+        );
+        // Récupérez les stages
+        const stagesData = responseData.stages;
+        // Initialisez un tableau pour stocker les stages avec employeur
+        const stagesAvecEmployeur = [];
+
+        for (const stage of stagesData) {
+          // Récupérez l'employeur correspondant à chaque stage
+          const employeurResponse = await sendRequest(
+            process.env.REACT_APP_BACKEND_URL +
+              "/employeurs/" +
+              stage.employeur_id
+          );
+          // Ajoutez l'objet employeur au stage
+          stage.employeur = employeurResponse.employeur;
+          // Ajoutez le stage mis à jour à la liste
+          stagesAvecEmployeur.push(stage);
+        }
+
+        // Mettez à jour l'état avec les stages incluant les employeurs
+        setStages(stagesAvecEmployeur);
+      } catch (err) {
+        console.log(err);
+        alert("Erreur lors de la connexion" + err);
+      }
+    };
+    recupererStages();
+  }, [sendRequest]);
+
   return (
     <React.Fragment>
+      {stages && <StageList items={stages} />}
         <div>
-            <h1>Liste de stages auxquels vous avez postulé</h1>
+            <h1>Liste de stage postuler</h1>
         </div>
     </React.Fragment>
   );

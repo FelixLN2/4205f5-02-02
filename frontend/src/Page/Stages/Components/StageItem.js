@@ -35,6 +35,7 @@ const StageItem = (props) => {
               <h1>{props.titre}</h1>
               <h4>Description: {props.description}</h4>
               <h4>Courriel: {props.courriel}</h4>
+              <button>Delete</button>
             </div>
           </Card>
         </li>

@@ -50,7 +50,7 @@ const NewStage = () => {
         isValid: false,
       },
       status: {
-        value: "Ouvert",
+        value: "ouvert",
         isValid: true,
       },
     },
