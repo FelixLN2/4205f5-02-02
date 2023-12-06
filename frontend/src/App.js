@@ -84,6 +84,7 @@ const App = () =>{
         <main>{routes}</main>
       </Router>
       </AuthContext.Provider>
+      <footer>Ceci est la version 1</footer>
       </div>
 
     </div>

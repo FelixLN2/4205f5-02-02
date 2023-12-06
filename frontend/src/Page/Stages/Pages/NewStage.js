@@ -86,6 +86,7 @@ const NewStage = () => {
       console.log(responseData);
       history.push("/4205f5-02-02/Stage/liste");
     } catch (err) {
+      alert("Problème lors de l'ajout du stage!");
       //history.push("/4205f5-02-02/Contact")
     }
   };

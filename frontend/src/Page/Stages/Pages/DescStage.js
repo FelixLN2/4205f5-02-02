@@ -106,10 +106,10 @@ const DescStage = () => {
         <p>Prenom: {stageData.prenom}</p> */}
         </div>
         <br/><br/>
-        <Link to={`/Stage/modifierStages/${id}`}>
+        <Link to={`/4205f5-02-02/Stage/modifierStages/${id}`}>
           <button>Modifier</button>
         </Link>
-        <Link to={`/Stage/deleteStages/${id}`}>
+        <Link to={`/4205f5-02-02/Stage/deleteStages/${id}`}>
         <button>Supprimer</button>
         </Link>
       </React.Fragment>
@@ -141,11 +141,11 @@ const DescStage = () => {
         
 
             
-          <Link to={`/Stage/Postuler/${id}`}>
+          <Link to={`/4205f5-02-02/Stage/Postuler/${id}`}>
           <button >Postuler</button>
           </Link>
 
-          <Link to={`/Stage/Retirer/${id}`}>
+          <Link to={`/4205f5-02-02/Stage/Retirer/${id}`}>
           <button >Retirer ma candidature</button>
           </Link>
 

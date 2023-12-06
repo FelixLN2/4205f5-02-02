@@ -40,7 +40,7 @@ function NavLinks(props){
                     <NavLink to="/4205f5-02-02/Stage/liste">Stages</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/4205f5-02-02/Stage/ListePostuler">Stages postuler</NavLink>
+                    <NavLink to="/4205f5-02-02/Stage/ListePostuler">Stages postulés</NavLink>
                 </li>
                 <li>
                     <button onClick={handleLogout}>Déconnexion</button>

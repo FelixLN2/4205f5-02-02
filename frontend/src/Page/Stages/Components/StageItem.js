@@ -13,7 +13,7 @@ const StageItem = (props) => {
   //Si Employeur
   if (auth.typeCompte === "Employeur"){
     return (
-        <Link to={`/Stage/DescStage/${props.id}`}>
+        <Link to={`/4205f5-02-02/Stage/DescStage/${props.id}`}>
         <li className="stage-item">
           <Card className="stage-item__content">
             <div className="stage-item__info">
@@ -28,7 +28,7 @@ const StageItem = (props) => {
   //Si Etudiant
   else{
     return (
-      <Link to={`/Stage/DescStage/${props.id}`}>
+      <Link to={`/4205f5-02-02/Stage/DescStage/${props.id}`}>
         <li className="stage-item">
           <Card className="stage-item__content">
             <div className="stage-item__info">

@@ -117,7 +117,7 @@ const Auth = () => {
         }
       }
     } else {
-      // Code pour faire l'inscription si c'est un étudiant ou bien un 
+      // Code pour faire l'inscription si c'est un étudiant ou bien un Employeur
       if(formState.inputs.typeCompte.value === "Etudiant"){
         try {
           //etudiant
@@ -138,7 +138,7 @@ const Auth = () => {
             }
           );
           console.log(reponseData);
-          auth.login(reponseData.numAdmission, "Etudiant");
+          auth.login(formState.inputs.numAdmission.value, "Etudiant");
           alertMessage = "Inscription réussie!";
           history.push(process.env.REACT_APP_BACKEND_URL);
         } catch (err) {
@@ -167,7 +167,7 @@ const Auth = () => {
             }
           );
           console.log(reponseData);
-          auth.login(reponseData.identifiant, "Employeur");
+          auth.login(formState.inputs.identifiant.value, "Employeur");
           alertMessage = "Inscription réussie!";
           history.push(process.env.REACT_APP_BACKEND_URL);
         } catch (err) {
