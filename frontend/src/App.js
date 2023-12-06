@@ -46,23 +46,23 @@ const App = () =>{
       <Route path="/4205f5-02-02/" exact>
         <Accueil />
       </Route>
-      <Route path="/Auth" exact>
+      <Route path="/4205f5-02-02/Auth" exact>
         <Auth />
       </Route>
-      <Route path="/Stage/liste" exact>
+      <Route path="/4205f5-02-02/Stage/liste" exact>
         <Stages />
       </Route>
-      <Route path="/Stage/new" exact>
+      <Route path="/4205f5-02-02/Stage/new" exact>
         <NewStage />
       </Route>
-      <Route path="/Stage/ListePostuler" exact>
+      <Route path="/4205f5-02-02/Stage/ListePostuler" exact>
         <ListePostuler />
       </Route>
-      <Route path="/Stage/DescStage/:id" component={DescStage} />
-      <Route path="/Stage/modifierStages/:id" component={UpdateStage}/>
-      <Route path="/Stage/DeleteStages/:id" component={DeleteStage}/>
-      <Route path="/Stage/Postuler/:id" component={PostulerStage}/>
-      <Route path="/Stage/Retirer/:id" component={RetirerStage}/>
+      <Route path="/4205f5-02-02/Stage/DescStage/:id" component={DescStage} />
+      <Route path="/4205f5-02-02/Stage/modifierStages/:id" component={UpdateStage}/>
+      <Route path="/4205f5-02-02/Stage/DeleteStages/:id" component={DeleteStage}/>
+      <Route path="/4205f5-02-02/Stage/Postuler/:id" component={PostulerStage}/>
+      <Route path="/4205f5-02-02/Stage/Retirer/:id" component={RetirerStage}/>
       <Redirect to="/4205f5-02-02/" />
     </Switch>
   );
