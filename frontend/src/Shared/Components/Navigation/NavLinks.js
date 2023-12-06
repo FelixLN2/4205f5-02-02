@@ -17,10 +17,10 @@ function NavLinks(props){
         if (auth.typeCompte === "Employeur"){
             return <ul className="nav-links">
                 <li>
-                    <NavLink to="/Stage/liste">Stages</NavLink>
+                    <NavLink to="/4205f5-02-02/Stage/liste">Stages</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/Stage/new">Ajouter stage</NavLink>
+                    <NavLink to="/4205f5-02-02/Stage/new">Ajouter stage</NavLink>
                 </li>
             </ul>
         } 
@@ -28,10 +28,10 @@ function NavLinks(props){
         else{
             return <ul className="nav-links">
                 <li>
-                    <NavLink to="/Stage/liste">Stages</NavLink>
+                    <NavLink to="/4205f5-02-02/Stage/liste">Stages</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/Stage/ListePostuler">Stages postuler</NavLink>
+                    <NavLink to="/4205f5-02-02/Stage/ListePostuler">Stages postuler</NavLink>
                 </li>
             </ul>
         }
@@ -40,7 +40,7 @@ function NavLinks(props){
     else{
         return <ul className="nav-links">
                 <li>
-                    <NavLink to="/Auth">Connexion/Inscription</NavLink>
+                    <NavLink to="/4205f5-02-02/Auth">Connexion/Inscription</NavLink>
                 </li>
             </ul>
     }
