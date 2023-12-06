@@ -79,7 +79,7 @@ const App = () =>{
             logout: logout,
           }}
         >
-      <Router basename="/4205f5-02-02">
+      <Router>
         <MainNavigation/>
         <main>{routes}</main>
       </Router>

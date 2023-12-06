@@ -85,9 +85,9 @@ const UpdateStage = (props) => {
                 }
               );
               console.log(responseData);
-              history.push(`/Stage/liste`);
+              history.push(`/4205f5-02-02/Stage/liste`);
             } catch (err) {
-              //history.push("/Contact")
+              //history.push("/4205f5-02-02/Contact")
             }
           };
         

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import './NavLinks.css'
 
 import { AuthContext } from '../../../Shared/context/auth-context';
@@ -7,6 +7,12 @@ import { AuthContext } from '../../../Shared/context/auth-context';
 function NavLinks(props){
 
     const auth = useContext(AuthContext);
+    const history = useHistory();
+
+    const handleLogout = () => {
+        auth.logout();
+        history.push('/4205f5-02-02/Auth'); // Redirige vers la page de connexion après la déconnexion
+    };
     
     //Si  l'utilisateur est connecté la fonction va le trier le type d'utilisateur pour lui afficher seulement les choses qui est supposé à acceder.
     //sinon il a juste accès à connexion
@@ -22,6 +28,9 @@ function NavLinks(props){
                 <li>
                     <NavLink to="/4205f5-02-02/Stage/new">Ajouter stage</NavLink>
                 </li>
+                <li>
+                    <button onClick={handleLogout}>Déconnexion</button>
+                </li>
             </ul>
         } 
         //Si Etudiant
@@ -32,6 +41,9 @@ function NavLinks(props){
                 </li>
                 <li>
                     <NavLink to="/4205f5-02-02/Stage/ListePostuler">Stages postuler</NavLink>
+                </li>
+                <li>
+                    <button onClick={handleLogout}>Déconnexion</button>
                 </li>
             </ul>
         }
